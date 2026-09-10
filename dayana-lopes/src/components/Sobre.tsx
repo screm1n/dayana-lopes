@@ -14,19 +14,13 @@ const Sobre = () => (
 
         <div className="revela mt-8 space-y-6 text-lg leading-relaxed text-foreground/80">
           <p>
-            Sou nutricionista e ajudo pessoas que querem emagrecer, ganhar massa
-            e cuidar do corpo sem transformar a alimentação em medo, culpa ou
-            regra impossível de cumprir.
+            Trabalho com estética e ajudo mulheres a se sentirem ainda mais confiantes com a própria imagem.
           </p>
           <p>
-            Meu trabalho é te ensinar a comer com autonomia: entendendo suas
-            escolhas, respeitando sua rotina e construindo um caminho que faça
-            sentido fora do papel.
+            Cada atendimento começa com escuta, cuidado e uma avaliação atenta para entender o que faz sentido para você.
           </p>
           <p>
-            Nada de dieta de gaveta. O plano nasce da sua vida real, dos seus
-            objetivos e do que precisa mudar para você sustentar resultado com
-            mais segurança.
+            Meu propósito é entregar resultados naturais, respeitando sua beleza e valorizando a sua individualidade.
           </p>
         </div>
       </div>

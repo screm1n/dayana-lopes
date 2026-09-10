@@ -2,22 +2,22 @@
 //  PREENCHER TUDO AQUI. Reflete no site inteiro.
 // ============================================================
 
-export const NOME = "NOME DA CLIENTE";
-export const NOME_COMPLETO = "NOME COMPLETO";
-export const PROFISSAO = "Nutricionista"; // ou Psicóloga, Fisioterapeuta...
+export const NOME = "Dayana Lopes";
+export const NOME_COMPLETO = "Dayana Lopes";
+export const PROFISSAO = "Esteticista";
 
 // Registro do conselho (CRN, CRP, CREFITO...). Vazio = some do rodapé.
 export const REGISTRO = "";
 
-export const CIDADE = "CIDADE, UF";
-export const ATENDIMENTO = "Presencial em CIDADE e online para todo o Brasil";
+export const CIDADE = "Belo Horizonte, MG";
+export const ATENDIMENTO = "Atendimento presencial em Belo Horizonte";
 
 // Só os dígitos, com DDI 55.
-export const WHATSAPP_NUMERO = "(00) 00000-0000";
+export const WHATSAPP_NUMERO = "WhatsApp";
 export const WHATSAPP_TEL = "";
 
-export const INSTAGRAM = "https://www.instagram.com/USUARIO";
-export const INSTAGRAM_HANDLE = "@USUARIO";
+export const INSTAGRAM = "https://www.instagram.com/dayanalopes";
+export const INSTAGRAM_HANDLE = "@dayanalopes";
 
 // Cai no Instagram enquanto o WhatsApp não estiver preenchido,
 // pra nenhum botão do site ficar quebrado.

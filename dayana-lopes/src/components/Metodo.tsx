@@ -5,25 +5,25 @@ const passos = [
     numero: "01",
     titulo: "A gente conversa",
     texto:
-      "Você entra em contato e a gente marca a primeira consulta, presencial em BH ou online.",
+      "Você entra em contato e conta o que gostaria de transformar ou realçar.",
   },
   {
     numero: "02",
     titulo: "Eu entendo sua rotina",
     texto:
-      "Seus horários, preferências, treinos, objetivos, histórico alimentar e o que já travou seus resultados antes.",
+      "Entendo seus desejos, seus traços e o resultado que combina com você.",
   },
   {
     numero: "03",
     titulo: "Montamos uma estratégia",
     texto:
-      "Nada pronto de gaveta: o plano é pensado para emagrecimento, ganho de massa e autonomia alimentar.",
+      "Escolhemos o procedimento e o cuidado adequado para um resultado elegante.",
   },
   {
     numero: "04",
     titulo: "Ajustamos o caminho",
     texto:
-      "Acompanhamos sua evolução e fazemos ajustes para o plano continuar possível na vida real.",
+      "Você recebe orientação em cada etapa, com segurança e acompanhamento próximo.",
   },
 ];
 
@@ -33,8 +33,8 @@ const Metodo = () => (
       <div className="revela mx-auto max-w-2xl text-center">
         <p className="rotulo">Como funciona</p>
         <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
-          Sem dieta de gaveta.
-          <span className="block italic">Com direção e autonomia.</span>
+          Beleza sem exageros.
+          <span className="block italic">Com cuidado e intenção.</span>
         </h2>
       </div>
 

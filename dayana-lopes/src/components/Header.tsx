@@ -5,7 +5,7 @@ import { ImagemComPlaceholder } from "./Placeholder";
 
 const secoes = [
   { id: "sobre", rotulo: "Sobre mim" },
-  { id: "metodo", rotulo: "Como funciona" },
+  { id: "servicos", rotulo: "Serviços" },
   { id: "para-quem", rotulo: "Para quem é" },
   { id: "espaco", rotulo: "Atendimento" },
   { id: "contato", rotulo: "Contato" },

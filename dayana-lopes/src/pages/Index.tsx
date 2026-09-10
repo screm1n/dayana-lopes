@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Destaque from "@/components/Destaque";
+import Servicos from "@/components/Servicos";
 import Sobre from "@/components/Sobre";
 import Metodo from "@/components/Metodo";
 import ParaQuem from "@/components/ParaQuem";
@@ -19,6 +20,7 @@ const Index = () => {
       <main>
         <Hero />
         <Destaque />
+        <Servicos />
         <Sobre />
         <Metodo />
         <ParaQuem />

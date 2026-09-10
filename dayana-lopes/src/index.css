@@ -7,37 +7,37 @@
 
 @layer base {
   :root {
-    --background: 0 0% 92%; /* #EAEAEA — off-white acinzentado */
-    --foreground: 20 24% 11%; /* #221915 — café profundo */
+    --background: 330 38% 97%;
+    --foreground: 325 25% 18%;
 
-    --card: 40 14% 96%;
-    --card-foreground: 20 24% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 325 25% 18%;
 
-    --popover: 40 14% 96%;
-    --popover-foreground: 20 24% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 325 25% 18%;
 
-    --primary: 24 19% 49%; /* #927967 — taupe da peça */
-    --primary-foreground: 40 14% 96%;
+    --primary: 335 41% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 22 18% 71%; /* #C6B2A3 — bege rosado */
-    --secondary-foreground: 20 24% 11%;
+    --secondary: 327 43% 88%;
+    --secondary-foreground: 325 25% 18%;
 
-    --muted: 24 10% 78%;
-    --muted-foreground: 23 13% 34%;
+    --muted: 327 20% 90%;
+    --muted-foreground: 325 12% 42%;
 
-    --accent: 23 18% 42%; /* #6F5B4F — café médio */
-    --accent-foreground: 40 14% 96%;
+    --accent: 316 54% 39%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 66% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 24 11% 76%;
-    --input: 24 11% 76%;
-    --ring: 24 19% 49%;
+    --border: 327 24% 84%;
+    --input: 327 24% 84%;
+    --ring: 335 41% 52%;
 
     --radius: 1rem;
 
-    --sombra-carta: 0 2px 28px -16px hsl(20 24% 11% / 0.42);
+    --sombra-carta: 0 2px 28px -16px hsl(325 25% 18% / 0.28);
   }
 }
 

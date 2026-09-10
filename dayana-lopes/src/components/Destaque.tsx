@@ -3,18 +3,18 @@ import { HandHeart, MapPinned, UtensilsCrossed } from "lucide-react";
 const itens = [
   {
     icone: HandHeart,
-    titulo: "Sem medo",
-    texto: "uma relação mais leve com a comida",
+    titulo: "Naturalidade",
+    texto: "resultados que respeitam seus traços",
   },
   {
     icone: UtensilsCrossed,
-    titulo: "Sem dieta pronta",
-    texto: "estratégias para a sua rotina real",
+    titulo: "Cuidado",
+    texto: "atendimento próximo e personalizado",
   },
   {
     icone: MapPinned,
-    titulo: "BH e online",
-    texto: "consulta em Belo Horizonte ou à distância",
+    titulo: "Sempre Linda",
+    texto: "beleza, confiança e autoestima",
   },
 ];
 

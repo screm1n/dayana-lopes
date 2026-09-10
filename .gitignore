@@ -1,0 +1,4 @@
+# Local Netlify folder
+.netlify
+dayana-lopes/node_modules
+dayana-lopes/dist

@@ -1,10 +1,10 @@
 const situacoes = [
-  "Quer emagrecer sem viver com medo de comer",
-  "Busca ganhar massa com uma estratégia possível",
-  "Cansou de dietas prontas que não cabem na rotina",
-  "Sente culpa quando sai do plano alimentar",
-  "Precisa de orientação para fazer escolhas melhores",
-  "Quer autonomia para manter resultado sem extremos",
+  "Quer realçar sua beleza com naturalidade",
+  "Busca cuidar da pele e dos seus traços",
+  "Deseja se sentir mais confiante no espelho",
+  "Valoriza um atendimento acolhedor e individual",
+  "Quer resultados elegantes, sem exageros",
+  "Precisa de orientação para escolher o melhor procedimento",
 ];
 
 const ParaQuem = () => (
@@ -20,8 +20,7 @@ const ParaQuem = () => (
           </h2>
           <span className="mt-8 fio" />
           <p className="mt-6 max-w-md leading-relaxed text-foreground/75">
-            Não é sobre seguir uma lista perfeita. É sobre aprender a decidir
-            melhor, com clareza e consistência.
+            O cuidado começa entendendo você e termina com uma versão ainda mais sua.
           </p>
         </div>
 
