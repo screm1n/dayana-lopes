@@ -38,7 +38,7 @@ const Hero = () => (
     <div className="container">
       <div className="flex flex-col gap-10 md:grid md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-16">
         <div className="order-1 animate-sobe-suave text-center md:order-none md:text-left">
-          <p className="rotulo">Estética facial · Beleza natural</p>
+          <p className="rotulo">Dra. Dayana Lopes · CRBM 17976</p>
 
           <LogoHeroMobile />
 
@@ -51,6 +51,12 @@ const Hero = () => (
 
           <p className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-foreground/80 md:mx-0">
             Procedimentos estéticos personalizados para realçar sua beleza com segurança, leveza e naturalidade.
+          </p>
+
+          <p className="mx-auto mt-5 max-w-lg text-sm font-medium leading-relaxed text-accent md:mx-0">
+            Estética Avançada · Tricologia Capilar
+            <span className="mx-2 text-primary/35">|</span>
+            Harmonização Facial/Corporal · Histotecnologia Clínica
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row md:justify-start">

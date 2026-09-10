@@ -4,11 +4,11 @@
 
 export const NOME = "Dayana Lopes";
 export const NOME_COMPLETO = "Dayana Lopes";
-export const PROFISSAO = "Esteticista";
+export const PROFISSAO = "Estética Avançada · Tricologia Capilar";
 export const NOME_CLINICA = "Espaço Sempre Linda Estética e Beleza";
 
 // Registro do conselho (CRN, CRP, CREFITO...). Vazio = some do rodapé.
-export const REGISTRO = "";
+export const REGISTRO = "CRBM 17976";
 
 export const CIDADE = "Belo Horizonte, MG";
 export const ATENDIMENTO = "Atendimento presencial em Belo Horizonte";
