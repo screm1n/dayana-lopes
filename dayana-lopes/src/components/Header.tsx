@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { LINK_AGENDAMENTO, NOME, NOME_CLINICA, PROFISSAO } from "@/lib/links";
+import { LINK_AGENDAMENTO, NOME, PROFISSAO } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
 
 const secoes = [
@@ -10,19 +10,6 @@ const secoes = [
   { id: "espaco", rotulo: "Atendimento" },
   { id: "contato", rotulo: "Contato" },
 ];
-
-const LogoClinica = () => {
-  const [src, setSrc] = useState("/logo-clinica.png");
-
-  return (
-    <img
-      src={src}
-      alt={NOME_CLINICA}
-      onError={() => setSrc("/logo.png")}
-      className="h-20 w-20 rounded-xl border border-primary/10 bg-white p-1 shadow-carta md:h-24 md:w-24"
-    />
-  );
-};
 
 const Header = () => {
   const [rolou, setRolou] = useState(false);
@@ -54,7 +41,6 @@ const Header = () => {
           className="flex flex-col items-start gap-1.5 text-left leading-tight"
           aria-label="Voltar ao topo"
         >
-          <LogoClinica />
           <span className="flex items-center gap-3">
             <ImagemComPlaceholder
               src="/logo.png"

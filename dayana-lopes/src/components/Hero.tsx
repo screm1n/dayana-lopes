@@ -1,5 +1,5 @@
 import { MessageCircleHeart } from "lucide-react";
-import { ATENDIMENTO, LINK_AGENDAMENTO, NOME, NOME_COMPLETO, PROFISSAO } from "@/lib/links";
+import { ATENDIMENTO, LINK_AGENDAMENTO, NOME, NOME_CLINICA, NOME_COMPLETO, PROFISSAO } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
 
 const FotoPerfil = ({ className = "" }: { className?: string }) => (
@@ -19,17 +19,17 @@ const FotoPerfil = ({ className = "" }: { className?: string }) => (
 
 const LogoHeroMobile = () => (
   <ImagemComPlaceholder
-    src="/logo.png"
-    alt={`Logo ${NOME}`}
+    src="/logo-clinica.png"
+    alt={NOME_CLINICA}
     formato="quadrado"
     compacto
     ajuste="contain"
-    className="mx-auto mb-7 mt-7 h-28 w-28 !rounded-lg bg-white p-3 shadow-carta md:hidden"
+    className="mx-auto mb-7 mt-7 h-40 w-40 !rounded-lg bg-white p-2 shadow-carta md:hidden"
   />
 );
 
 const Hero = () => (
-  <section className="relative overflow-hidden pb-20 pt-48 md:pb-28 md:pt-48">
+  <section className="relative overflow-hidden pb-20 pt-28 md:pb-28 md:pt-36">
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(90%_70%_at_100%_0%,hsl(var(--secondary))_0%,transparent_60%)]"
