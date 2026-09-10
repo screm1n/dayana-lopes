@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Sistema de design — PREENCHER com a paleta do cliente.
+   Paleta tirada da referência: off-white, taupe, café e cinza quente. */
+
+@layer base {
+  :root {
+    --background: 0 0% 92%; /* #EAEAEA — off-white acinzentado */
+    --foreground: 20 24% 11%; /* #221915 — café profundo */
+
+    --card: 40 14% 96%;
+    --card-foreground: 20 24% 11%;
+
+    --popover: 40 14% 96%;
+    --popover-foreground: 20 24% 11%;
+
+    --primary: 24 19% 49%; /* #927967 — taupe da peça */
+    --primary-foreground: 40 14% 96%;
+
+    --secondary: 22 18% 71%; /* #C6B2A3 — bege rosado */
+    --secondary-foreground: 20 24% 11%;
+
+    --muted: 24 10% 78%;
+    --muted-foreground: 23 13% 34%;
+
+    --accent: 23 18% 42%; /* #6F5B4F — café médio */
+    --accent-foreground: 40 14% 96%;
+
+    --destructive: 0 66% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 24 11% 76%;
+    --input: 24 11% 76%;
+    --ring: 24 19% 49%;
+
+    --radius: 1rem;
+
+    --sombra-carta: 0 2px 28px -16px hsl(20 24% 11% / 0.42);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+@layer components {
+  .fio {
+    @apply block h-px w-14 bg-accent/70;
+  }
+
+  .rotulo {
+    @apply text-[0.72rem] font-medium uppercase tracking-[0.32em] text-accent;
+  }
+}
+
+@layer utilities {
+  .revela {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .revela.revelado {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .revela {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
