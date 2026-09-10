@@ -29,7 +29,7 @@ const LogoHeroMobile = () => (
 );
 
 const Hero = () => (
-  <section className="relative overflow-hidden pb-20 pt-28 md:pb-28 md:pt-36">
+  <section className="relative overflow-hidden pb-20 pt-56 md:pb-28 md:pt-52">
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(90%_70%_at_100%_0%,hsl(var(--secondary))_0%,transparent_60%)]"

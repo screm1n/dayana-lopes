@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { LINK_AGENDAMENTO, NOME, NOME_CLINICA } from "@/lib/links";
+import { LINK_AGENDAMENTO, NOME, NOME_CLINICA, PROFISSAO } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
 
 const secoes = [
@@ -10,6 +10,19 @@ const secoes = [
   { id: "espaco", rotulo: "Atendimento" },
   { id: "contato", rotulo: "Contato" },
 ];
+
+const LogoClinica = () => {
+  const [src, setSrc] = useState("/logo_clinica.png");
+
+  return (
+    <img
+      src={src}
+      alt={NOME_CLINICA}
+      onError={() => setSrc("/logo.png")}
+      className="h-14 w-48 object-contain object-left md:h-16 md:w-56"
+    />
+  );
+};
 
 const Header = () => {
   const [rolou, setRolou] = useState(false);
@@ -38,23 +51,22 @@ const Header = () => {
       <nav className="container flex items-center justify-between gap-4 py-3">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="flex flex-col items-start gap-1.5 text-left leading-tight md:flex-row md:items-center md:gap-3"
+          className="flex flex-col items-start gap-1.5 text-left leading-tight"
           aria-label="Voltar ao topo"
         >
-          <ImagemComPlaceholder
-            src="/logo.png"
-            alt={`Logo ${NOME}`}
-            formato="quadrado"
-            compacto
-            ajuste="contain"
-            className="h-16 w-16 shrink-0 !rounded-md border border-primary/10 bg-white p-1 shadow-carta md:h-14 md:w-14 md:p-1.5"
-          />
-          <span>
-            <span className="block font-display text-xl text-primary md:text-2xl">
-              {NOME}
-            </span>
-            <span className="block max-w-[210px] text-[0.52rem] uppercase tracking-[0.16em] text-accent md:max-w-none md:text-[0.6rem] md:tracking-[0.2em]">
-              {NOME_CLINICA}
+          <LogoClinica />
+          <span className="flex items-center gap-3">
+            <ImagemComPlaceholder
+              src="/logo.png"
+              alt={`Logo ${NOME}`}
+              formato="quadrado"
+              compacto
+              ajuste="contain"
+              className="h-16 w-16 shrink-0 !rounded-md border border-primary/10 bg-white p-1 shadow-carta md:h-14 md:w-14 md:p-1.5"
+            />
+            <span>
+              <span className="block font-display text-xl text-primary md:text-2xl">{NOME}</span>
+              <span className="block text-[0.52rem] uppercase tracking-[0.16em] text-accent md:text-[0.6rem] md:tracking-[0.2em]">{PROFISSAO}</span>
             </span>
           </span>
         </button>
