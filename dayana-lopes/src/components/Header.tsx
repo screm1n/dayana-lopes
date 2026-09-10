@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { LINK_AGENDAMENTO, NOME, PROFISSAO } from "@/lib/links";
+import { LINK_AGENDAMENTO, NOME, NOME_CLINICA } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
 
 const secoes = [
@@ -53,8 +53,8 @@ const Header = () => {
             <span className="block font-display text-xl text-primary md:text-2xl">
               {NOME}
             </span>
-            <span className="block text-[0.6rem] uppercase tracking-[0.26em] text-accent">
-              {PROFISSAO}
+            <span className="block max-w-[210px] text-[0.52rem] uppercase tracking-[0.16em] text-accent md:max-w-none md:text-[0.6rem] md:tracking-[0.2em]">
+              {NOME_CLINICA}
             </span>
           </span>
         </button>
