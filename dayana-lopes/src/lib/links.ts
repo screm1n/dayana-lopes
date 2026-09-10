@@ -14,8 +14,8 @@ export const CIDADE = "Belo Horizonte, MG";
 export const ATENDIMENTO = "Atendimento presencial em Belo Horizonte";
 
 // Só os dígitos, com DDI 55.
-export const WHATSAPP_NUMERO = "WhatsApp";
-export const WHATSAPP_TEL = "";
+export const WHATSAPP_NUMERO = "(31) 98387-4765";
+export const WHATSAPP_TEL = "5531983874765";
 
 export const INSTAGRAM = "https://www.instagram.com/explore/locations/584703575030591/espaco-sempre-linda-estetica-e-beleza/";
 export const INSTAGRAM_HANDLE = "Espaço Sempre Linda";
