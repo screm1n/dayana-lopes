@@ -47,7 +47,7 @@ const Header = () => {
             formato="quadrado"
             compacto
             ajuste="contain"
-            className="h-12 w-12 shrink-0 !rounded-md border border-primary/10 bg-white p-1.5 shadow-carta md:h-14 md:w-14"
+            className="h-16 w-16 shrink-0 !rounded-md border border-primary/10 bg-white p-1 shadow-carta md:h-14 md:w-14 md:p-1.5"
           />
           <span>
             <span className="block font-display text-xl text-primary md:text-2xl">

@@ -19,7 +19,9 @@ const Servicos = () => {
         </div>
         <div className="revela relative mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-primary/15 bg-card shadow-carta">
           <div className="grid md:grid-cols-[1.35fr_0.65fr]">
-            <img src={imagens[indice]} alt={titulos[indice]} className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-[440px]" />
+            <div className="flex h-[min(110vw,520px)] w-full items-center justify-center bg-secondary/20 md:h-[440px]">
+              <img src={imagens[indice]} alt={titulos[indice]} className="max-h-full max-w-full object-contain" />
+            </div>
             <div className="flex flex-col justify-between p-7 md:p-10">
               <div><span className="grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary"><Sparkles className="h-5 w-5" /></span><p className="mt-8 text-sm uppercase tracking-[0.25em] text-accent">{String(indice + 1).padStart(2, "0")} / 08</p><h3 className="mt-3 font-display text-3xl text-primary md:text-4xl">{titulos[indice]}</h3></div>
               <div className="mt-8 flex items-center justify-between"><div className="flex gap-2" aria-label="Selecionar serviço">{imagens.map((imagem, i) => <button key={imagem} onClick={() => setIndice(i)} aria-label={`Ver serviço ${i + 1}`} className={`h-2 rounded-full transition-all ${i === indice ? "w-8 bg-primary" : "w-2 bg-primary/25"}`} />)}</div><div className="flex gap-2"><button onClick={anterior} aria-label="Serviço anterior" className="grid h-10 w-10 place-items-center rounded-full border border-primary/20 text-primary hover:bg-secondary"><ChevronLeft className="h-5 w-5" /></button><button onClick={proximo} aria-label="Próximo serviço" className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground hover:opacity-90"><ChevronRight className="h-5 w-5" /></button></div></div>
