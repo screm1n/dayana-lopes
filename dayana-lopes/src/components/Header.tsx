@@ -12,14 +12,14 @@ const secoes = [
 ];
 
 const LogoClinica = () => {
-  const [src, setSrc] = useState("/logo_clinica.png");
+  const [src, setSrc] = useState("/logo-clinica.png");
 
   return (
     <img
       src={src}
       alt={NOME_CLINICA}
       onError={() => setSrc("/logo.png")}
-      className="h-14 w-48 object-contain object-left md:h-16 md:w-56"
+      className="h-20 w-20 rounded-xl border border-primary/10 bg-white p-1 shadow-carta md:h-24 md:w-24"
     />
   );
 };
@@ -62,7 +62,7 @@ const Header = () => {
               formato="quadrado"
               compacto
               ajuste="contain"
-              className="h-16 w-16 shrink-0 !rounded-md border border-primary/10 bg-white p-1 shadow-carta md:h-14 md:w-14 md:p-1.5"
+              className="h-[4.5rem] w-[4.5rem] shrink-0 !rounded-md border border-primary/10 bg-white p-1 shadow-carta md:h-16 md:w-16 md:p-1.5"
             />
             <span>
               <span className="block font-display text-xl text-primary md:text-2xl">{NOME}</span>
