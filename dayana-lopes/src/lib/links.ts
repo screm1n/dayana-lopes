@@ -17,8 +17,8 @@ export const ATENDIMENTO = "Atendimento presencial em Belo Horizonte";
 export const WHATSAPP_NUMERO = "(31) 98387-4765";
 export const WHATSAPP_TEL = "5531983874765";
 
-export const INSTAGRAM = "https://www.instagram.com/explore/locations/584703575030591/espaco-sempre-linda-estetica-e-beleza/";
-export const INSTAGRAM_HANDLE = "Espaço Sempre Linda";
+export const INSTAGRAM = "https://www.instagram.com/espaco_sempre_linda/";
+export const INSTAGRAM_HANDLE = "@espaco_sempre_linda";
 
 // Cai no Instagram enquanto o WhatsApp não estiver preenchido,
 // pra nenhum botão do site ficar quebrado.
