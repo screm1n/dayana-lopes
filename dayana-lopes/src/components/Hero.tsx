@@ -1,15 +1,17 @@
 import { MessageCircleHeart } from "lucide-react";
 import { ATENDIMENTO, LINK_AGENDAMENTO, NOME, NOME_CLINICA, NOME_COMPLETO, PROFISSAO } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
+import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
-const FotoPerfil = ({ className = "" }: { className?: string }) => (
+const FotoPerfil = ({ className = "", src }: { className?: string; src: string }) => (
   <div className={`relative mx-auto w-full ${className}`}>
     <div
       aria-hidden
       className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-accent/25 md:-right-6 md:-top-6 md:h-32 md:w-32"
     />
     <ImagemComPlaceholder
-      src="/perfil.jpg"
+      src={src}
+      arquivoPendente="perfil.jpg"
       alt={`${NOME_COMPLETO}, ${PROFISSAO.toLowerCase()}`}
       className="relative aspect-[3/4] w-full shadow-carta"
       legenda="foto de perfil"
@@ -17,9 +19,10 @@ const FotoPerfil = ({ className = "" }: { className?: string }) => (
   </div>
 );
 
-const LogoHeroMobile = () => (
+const LogoHeroMobile = ({ src }: { src: string }) => (
   <ImagemComPlaceholder
-    src="/logo-clinica.png"
+    src={src}
+    arquivoPendente="logo-clinica.png"
     alt={NOME_CLINICA}
     formato="quadrado"
     compacto
@@ -28,7 +31,11 @@ const LogoHeroMobile = () => (
   />
 );
 
-const Hero = () => (
+const Hero = () => {
+  const { conteudo } = useConteudo();
+  const srcPerfil = urlImagem(conteudo.imagens.perfil, "/perfil.jpg");
+  const srcLogoClinica = urlImagem(conteudo.imagens.logoClinica, "/logo-clinica.png");
+  return (
   <section className="relative overflow-hidden pb-20 pt-28 md:pb-28 md:pt-36">
     <div
       aria-hidden
@@ -40,14 +47,14 @@ const Hero = () => (
         <div className="order-1 animate-sobe-suave text-center md:order-none md:text-left">
           <p className="rotulo">Dra. Dayana Lopes · CRBM 17976</p>
 
-          <LogoHeroMobile />
+          <LogoHeroMobile src={srcLogoClinica} />
 
           <h1 className="mt-5 font-display text-[2.7rem] leading-[1.06] text-primary sm:text-6xl md:text-[4.2rem]">
             Sua beleza,
             <span className="block italic text-accent">sua melhor versão.</span>
           </h1>
 
-          <FotoPerfil className="mt-8 max-w-[250px] md:hidden" />
+          <FotoPerfil src={srcPerfil} className="mt-8 max-w-[250px] md:hidden" />
 
           <p className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-foreground/80 md:mx-0">
             Procedimentos estéticos personalizados para realçar sua beleza com segurança, leveza e naturalidade.
@@ -80,10 +87,11 @@ const Hero = () => (
           <p className="mt-5 text-sm text-muted-foreground">{ATENDIMENTO}</p>
         </div>
 
-        <FotoPerfil className="hidden max-w-md md:block" />
+        <FotoPerfil src={srcPerfil} className="hidden max-w-md md:block" />
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Hero;

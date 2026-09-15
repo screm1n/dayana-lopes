@@ -11,15 +11,19 @@ import {
   ROTULO_AGENDAMENTO,
 } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
+import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
-const Footer = () => (
+const Footer = () => {
+  const { conteudo } = useConteudo();
+  return (
   <footer className="bg-primary text-primary-foreground">
     <div className="container py-16">
       <div className="grid gap-12 md:grid-cols-[1.4fr_1fr]">
         <div>
           <div className="flex items-center gap-4">
             <ImagemComPlaceholder
-              src="/logo.png"
+              src={urlImagem(conteudo.imagens.logo, "/logo.png")}
+              arquivoPendente="logo.png"
               alt={`Logo ${NOME_COMPLETO}`}
               formato="quadrado"
               compacto
@@ -74,6 +78,7 @@ const Footer = () => (
       </div>
     </div>
   </footer>
-);
+  );
+};
 
 export default Footer;

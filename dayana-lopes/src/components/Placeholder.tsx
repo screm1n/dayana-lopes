@@ -13,6 +13,8 @@ type Props = {
   /** Sem texto — só um bloco de cor. Bom para logos pequenos no header. */
   compacto?: boolean;
   ajuste?: "cover" | "contain";
+  /** Nome do arquivo estático correspondente (pra mensagem "substituir public/..."). */
+  arquivoPendente?: string;
 };
 
 export function ImagemComPlaceholder({
@@ -23,6 +25,7 @@ export function ImagemComPlaceholder({
   legenda = "aguardando arquivo",
   compacto = false,
   ajuste = "cover",
+  arquivoPendente,
 }: Props) {
   const [erro, setErro] = useState(false);
 
@@ -30,13 +33,17 @@ export function ImagemComPlaceholder({
     formato === "circular" ? "rounded-full" : "rounded-2xl";
   const encaixe = ajuste === "contain" ? "object-contain" : "object-cover";
 
+  const nomeArquivo =
+    arquivoPendente ??
+    (src.includes("/.netlify/functions/") ? "" : src.replace(/^\//, ""));
+
   if (erro) {
     if (compacto) {
       return (
         <div
           role="img"
           aria-label={`${alt} — pendente`}
-          title="Substituir public/logo.png"
+          title={nomeArquivo ? `Substituir public/${nomeArquivo}` : `Pendente: ${alt}`}
           className={`overflow-hidden bg-secondary/70 ${forma} ${className}`}
         />
       );
@@ -53,9 +60,11 @@ export function ImagemComPlaceholder({
             Pendente
           </p>
           <p className="mt-2 font-display text-xl italic leading-tight">{alt}</p>
-          <p className="mt-2 text-[0.7rem] text-foreground/50">
-            substituir <code className="font-mono">public/{src.replace(/^\//, "")}</code>
-          </p>
+          {nomeArquivo && (
+            <p className="mt-2 text-[0.7rem] text-foreground/50">
+              substituir <code className="font-mono">public/{nomeArquivo}</code>
+            </p>
+          )}
         </div>
       </div>
     );
@@ -66,6 +75,7 @@ export function ImagemComPlaceholder({
       src={src}
       alt={alt}
       onError={() => setErro(true)}
+      onLoad={() => erro && setErro(false)}
       className={`${forma} ${encaixe} ${className}`}
     />
   );

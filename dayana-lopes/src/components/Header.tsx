@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { LINK_AGENDAMENTO, NOME, PROFISSAO } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
+import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
 const secoes = [
   { id: "sobre", rotulo: "Sobre mim" },
   { id: "servicos", rotulo: "Serviços" },
+  { id: "procedimentos", rotulo: "Procedimentos" },
   { id: "para-quem", rotulo: "Para quem é" },
   { id: "espaco", rotulo: "Atendimento" },
   { id: "contato", rotulo: "Contato" },
@@ -14,6 +16,7 @@ const secoes = [
 const Header = () => {
   const [rolou, setRolou] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
+  const { conteudo } = useConteudo();
 
   useEffect(() => {
     const aoRolar = () => setRolou(window.scrollY > 20);
@@ -43,7 +46,8 @@ const Header = () => {
         >
           <span className="flex items-center gap-3">
             <ImagemComPlaceholder
-              src="/logo.png"
+              src={urlImagem(conteudo.imagens.logo, "/logo.png")}
+              arquivoPendente="logo.png"
               alt={`Logo ${NOME}`}
               formato="quadrado"
               compacto
