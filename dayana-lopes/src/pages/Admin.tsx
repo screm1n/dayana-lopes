@@ -133,16 +133,33 @@ export default function Admin() {
 
   if (!autenticado) {
     return (
-      <div className="grid min-h-screen place-items-center bg-background px-6">
-        <form onSubmit={entrar} className="w-full max-w-sm space-y-5 rounded-2xl border border-primary/10 bg-card p-8 shadow-carta">
+      <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#0f0d13] px-6 text-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(190,120,175,0.28)_0%,transparent_60%),radial-gradient(60%_50%_at_100%_100%,rgba(139,92,246,0.22)_0%,transparent_65%)]"
+        />
+        <form
+          onSubmit={entrar}
+          className="relative w-full max-w-md space-y-8 rounded-3xl border border-white/10 bg-white/[0.03] p-10 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+        >
           <div>
-            <p className="rotulo">Solid Page Studio</p>
-            <h1 className="mt-3 font-display text-3xl text-primary">Painel de Dayana Lopes</h1>
-            <p className="mt-2 text-sm text-foreground/60">acesso restrito</p>
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.42em] text-fuchsia-300/80">
+              Solid Page Studio
+            </p>
+            <h1 className="mt-4 font-display text-[2.1rem] leading-[1.1] text-white">
+              Painel de <span className="italic text-fuchsia-200">Dayana Lopes</span>
+            </h1>
+            <p className="mt-3 text-sm font-light text-white/50">
+              Área exclusiva de gerenciamento do site.
+            </p>
           </div>
+
           <div>
-            <label htmlFor="senha" className="text-xs font-medium uppercase tracking-widest text-foreground/60">
-              Senha
+            <label
+              htmlFor="senha"
+              className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-white/60"
+            >
+              Senha de acesso
             </label>
             <input
               id="senha"
@@ -150,17 +167,25 @@ export default function Admin() {
               autoComplete="current-password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
-              className="mt-2 w-full rounded-full border border-primary/15 bg-background px-5 py-3 text-sm focus:border-primary focus:outline-none"
+              placeholder="digite sua senha"
+              className="mt-3 w-full rounded-xl border border-white/10 bg-black/30 px-5 py-3.5 text-sm text-white placeholder:text-white/30 focus:border-fuchsia-300/60 focus:outline-none focus:ring-2 focus:ring-fuchsia-300/20"
               required
             />
-            {erro && <p className="mt-2 text-xs text-red-600">{erro}</p>}
+            {erro && (
+              <p className="mt-3 text-xs font-medium tracking-wide text-rose-300">{erro}</p>
+            )}
           </div>
+
           <button
             type="submit"
-            className="w-full rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-carta transition-transform hover:scale-[1.02]"
+            className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-400 via-primary to-accent px-6 py-3.5 text-sm font-semibold tracking-wide text-white shadow-[0_10px_30px_-10px_rgba(220,120,190,0.6)] transition-transform hover:scale-[1.01]"
           >
-            Entrar
+            <span className="relative z-10">Entrar no painel</span>
           </button>
+
+          <p className="pt-2 text-center text-[0.68rem] font-medium uppercase tracking-[0.32em] text-white/30">
+            desenvolvido por Solid Page Studio
+          </p>
         </form>
       </div>
     );
