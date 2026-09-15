@@ -5,11 +5,10 @@ import { atualizarConteudoLocal, urlImagem, type ConteudoDto, type ProcedimentoD
 
 const CHAVE_SENHA = "dayana_admin_senha";
 
-type Alvo = "logo" | "logoClinica" | "perfil";
+type Alvo = "logo" | "perfil";
 
 const ROTULOS_IMAGEM: Record<Alvo, { titulo: string; ajuda: string; estatico: string }> = {
   logo: { titulo: "Logo da marca", ajuda: "aparece no cabeçalho e no rodapé", estatico: "/logo.png" },
-  logoClinica: { titulo: "Logo da clínica", ajuda: "aparece no hero (celular)", estatico: "/logo-clinica.png" },
   perfil: { titulo: "Foto de perfil", ajuda: "foto principal ao lado do título", estatico: "/perfil.jpg" },
 };
 
@@ -137,8 +136,8 @@ export default function Admin() {
       <div className="grid min-h-screen place-items-center bg-background px-6">
         <form onSubmit={entrar} className="w-full max-w-sm space-y-5 rounded-2xl border border-primary/10 bg-card p-8 shadow-carta">
           <div>
-            <p className="rotulo">Painel</p>
-            <h1 className="mt-3 font-display text-3xl text-primary">Solid Page Studio</h1>
+            <p className="rotulo">Solid Page Studio</p>
+            <h1 className="mt-3 font-display text-3xl text-primary">Painel de Dayana Lopes</h1>
             <p className="mt-2 text-sm text-foreground/60">acesso restrito</p>
           </div>
           <div>
@@ -491,17 +490,17 @@ function AbaImagens({
   conteudo: ConteudoDto | null;
   chamar: (corpo: unknown) => Promise<unknown>;
 }) {
-  const overrides = conteudo?.imagens ?? { logo: null, logoClinica: null, perfil: null };
+  const overrides = conteudo?.imagens ?? { logo: null, perfil: null };
 
   return (
     <div>
       <div>
         <h2 className="font-display text-xl text-primary">imagens do site</h2>
         <p className="mt-1 text-sm text-foreground/60">
-          troque logo, logo da clínica e foto de perfil. você pode voltar para a imagem original quando quiser.
+          troque logo e foto de perfil. você pode voltar para a imagem original quando quiser.
         </p>
       </div>
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         {(Object.keys(ROTULOS_IMAGEM) as Alvo[]).map((alvo) => (
           <CartaoImagem
             key={alvo}

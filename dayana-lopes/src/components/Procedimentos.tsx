@@ -44,7 +44,7 @@ const Procedimentos = () => {
           ) : (
             <div className="grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-stretch">
               <div className="relative overflow-hidden rounded-2xl border border-primary/15 bg-card shadow-carta">
-                <div className="relative aspect-[4/5] w-full bg-secondary/25 md:aspect-auto md:h-full">
+                <div className="relative aspect-square w-full bg-secondary/25">
                   <img
                     key={atual.id}
                     src={urlImagem(atual.midiaKey, "")}
