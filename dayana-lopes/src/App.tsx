@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./pages/Index";
 import Privacidade from "./pages/Privacidade";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import { useConversaoWhatsApp } from "@/hooks/use-conversao-whatsapp";
 
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/privacidade" element={<Privacidade />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
