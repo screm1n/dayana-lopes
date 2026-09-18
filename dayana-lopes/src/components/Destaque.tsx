@@ -18,21 +18,26 @@ const itens = [
   },
 ];
 
+// Faixa de selos colada no hero, com divisórias finas.
 const Destaque = () => (
-  <section className="border-y border-primary/10 bg-primary text-primary-foreground">
+  <section className="border-b border-border bg-card">
     <div className="container">
-      <ul className="grid divide-y divide-primary-foreground/15 md:grid-cols-3 md:divide-x md:divide-y-0">
+      <ul className="grid divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
         {itens.map(({ icone: Icone, titulo, texto }) => (
           <li
             key={titulo}
-            className="flex items-center gap-4 py-8 md:justify-center md:py-10"
+            className="flex items-center gap-4 py-7 md:justify-center md:px-6 md:py-8"
           >
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-primary-foreground/15 bg-primary-foreground/10 shadow-carta">
-              <Icone className="h-5 w-5" strokeWidth={1.8} aria-hidden />
-            </span>
+            <Icone
+              className="h-5 w-5 shrink-0 text-accent"
+              strokeWidth={1.6}
+              aria-hidden
+            />
             <div>
-              <p className="font-display text-2xl leading-tight">{titulo}</p>
-              <p className="text-sm text-primary-foreground/70">{texto}</p>
+              <p className="font-display text-xl leading-tight text-primary">
+                {titulo}
+              </p>
+              <p className="mt-0.5 text-sm text-muted-foreground">{texto}</p>
             </div>
           </li>
         ))}

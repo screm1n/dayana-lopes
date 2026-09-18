@@ -2,3 +2,5 @@
 .netlify
 dayana-lopes/node_modules
 dayana-lopes/dist
+dayana-lopes/deno.lock
+dayana-lopes/*.tsbuildinfo

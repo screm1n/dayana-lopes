@@ -10,68 +10,67 @@ import {
 const Contato = () => (
   <section id="contato" className="scroll-mt-24 bg-card py-24 md:py-32">
     <div className="container">
-      <div className="revela mx-auto max-w-2xl text-center">
-        <p className="rotulo">Contato</p>
-        <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
-          Vamos começar
-          <span className="block italic">com autonomia?</span>
-        </h2>
-        <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-foreground/75">
-          Entre em contato para tirar dúvidas, entender o acompanhamento e
-          agendar sua consulta.
-        </p>
-      </div>
+      <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+        <div className="revela">
+          <p className="rotulo">Contato</p>
+          <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
+            Vamos começar
+            <span className="block italic">com autonomia?</span>
+          </h2>
+          <span className="mt-8 fio" />
+          <p className="mt-7 max-w-md text-lg leading-relaxed text-foreground/75">
+            Entre em contato para tirar dúvidas, entender o acompanhamento e
+            agendar sua consulta.
+          </p>
 
-      <a
-        href={LINK_AGENDAMENTO}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="revela mx-auto mt-12 flex max-w-3xl flex-col items-center gap-6 rounded-2xl bg-primary p-10 text-center text-primary-foreground shadow-carta transition-transform hover:scale-[1.01] md:flex-row md:justify-between md:p-12 md:text-left"
-      >
-        <div className="flex flex-col items-center gap-5 md:flex-row">
-          <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-primary-foreground/20 bg-primary-foreground/10">
-            <MessageCircleHeart className="h-8 w-8" strokeWidth={1.8} />
-          </span>
-          <div>
-            <h3 className="font-display text-3xl md:text-4xl">
-              Agendar minha consulta
-            </h3>
-            <p className="mt-1 text-primary-foreground/80">
-              {ROTULO_AGENDAMENTO}
-            </p>
-          </div>
+          <a
+            href={LINK_AGENDAMENTO}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-9 inline-flex items-center gap-2.5 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground shadow-carta transition-transform hover:scale-[1.03]"
+          >
+            <MessageCircleHeart className="h-5 w-5" strokeWidth={1.8} />
+            Agendar minha consulta
+          </a>
         </div>
-        <span className="rounded-full bg-primary-foreground px-7 py-3.5 font-medium text-primary">
-          Agendar agora
-        </span>
-      </a>
 
-      <div className="mx-auto mt-4 grid max-w-3xl gap-4 sm:grid-cols-2">
-        <a
-          href={INSTAGRAM}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="revela group flex items-center gap-4 rounded-2xl border border-border bg-background p-6 transition-shadow hover:shadow-carta"
-        >
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-primary/10 bg-secondary text-primary">
-            <Instagram className="h-5 w-5" strokeWidth={1.8} aria-hidden />
-          </span>
-          <div>
-            <p className="font-display text-xl text-primary">Instagram</p>
-            <p className="text-sm text-muted-foreground group-hover:underline">
-              {INSTAGRAM_HANDLE}
-            </p>
-          </div>
-        </a>
+        <div className="revela rounded-2xl bg-secondary/40 p-8 md:p-10">
+          <ul className="divide-y divide-primary/10">
+            <li className="pb-6">
+              <p className="rotulo">Agendamento</p>
+              <a
+                href={LINK_AGENDAMENTO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block font-display text-2xl text-primary transition-colors hover:text-accent"
+              >
+                {ROTULO_AGENDAMENTO}
+              </a>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Fale comigo e agende agora
+              </p>
+            </li>
 
-        <div
-          className="revela flex items-center gap-4 rounded-2xl border border-border bg-background p-6"
-          style={{ transitionDelay: "80ms" }}
-        >
-          <div>
-            <p className="font-display text-xl text-primary">Atendimento</p>
-            <p className="text-sm text-muted-foreground">{ATENDIMENTO}</p>
-          </div>
+            <li className="py-6">
+              <p className="rotulo">Instagram</p>
+              <a
+                href={INSTAGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 flex items-center gap-2.5 font-display text-2xl text-primary transition-colors hover:text-accent"
+              >
+                <Instagram className="h-5 w-5" strokeWidth={1.7} aria-hidden />
+                {INSTAGRAM_HANDLE}
+              </a>
+            </li>
+
+            <li className="pt-6">
+              <p className="rotulo">Atendimento</p>
+              <p className="mt-2 font-display text-2xl leading-tight text-primary">
+                {ATENDIMENTO}
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -2,38 +2,43 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
+// A lista vem do painel /admin (Netlify Blobs). Só a apresentação mudou —
+// os dados continuam saindo de useConteudo() e as imagens de urlImagem().
 const Procedimentos = () => {
   const { conteudo, carregando } = useConteudo();
   const lista = conteudo.procedimentos;
   const [indice, setIndice] = useState(0);
 
   const proximo = () => setIndice((i) => (lista.length ? (i + 1) % lista.length : 0));
-  const anterior = () => setIndice((i) => (lista.length ? (i - 1 + lista.length) % lista.length : 0));
+  const anterior = () =>
+    setIndice((i) => (lista.length ? (i - 1 + lista.length) % lista.length : 0));
 
   const seguro = Math.min(indice, Math.max(0, lista.length - 1));
   const atual = lista[seguro];
 
   return (
-    <section id="procedimentos" className="scroll-mt-24 py-24 md:py-32">
+    <section id="procedimentos" className="scroll-mt-24 bg-card py-24 md:py-32">
       <div className="container">
-        <div className="revela mx-auto max-w-2xl text-center">
+        <div className="revela max-w-2xl">
           <p className="rotulo">Procedimentos</p>
           <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
             Cada procedimento,
             <span className="block italic">um cuidado único.</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-foreground/75">
-            Conheça os tratamentos que ofereço, pensados para valorizar sua beleza natural com técnica e delicadeza.
+          <span className="mt-8 fio" />
+          <p className="mt-7 max-w-lg text-lg leading-relaxed text-foreground/75">
+            Conheça os tratamentos que ofereço, pensados para valorizar sua
+            beleza natural com técnica e delicadeza.
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-4xl">
+        <div className="mt-14">
           {carregando ? (
-            <div className="grid h-[420px] place-items-center rounded-2xl border border-primary/10 bg-card/70 shadow-carta">
+            <div className="grid h-[24rem] place-items-center rounded-2xl bg-secondary/25">
               <p className="text-sm text-foreground/50">carregando…</p>
             </div>
           ) : lista.length === 0 ? (
-            <div className="grid h-[420px] place-items-center rounded-2xl border border-dashed border-primary/25 bg-card/50 px-6 text-center">
+            <div className="grid h-[24rem] place-items-center rounded-2xl border border-dashed border-primary/20 bg-secondary/20 px-6 text-center">
               <div>
                 <p className="rotulo">Em breve</p>
                 <p className="mt-4 max-w-md font-display text-2xl italic text-primary">
@@ -42,32 +47,32 @@ const Procedimentos = () => {
               </div>
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-stretch">
-              <div className="relative overflow-hidden rounded-2xl border border-primary/15 bg-card shadow-carta">
-                <div className="relative aspect-square w-full bg-secondary/25">
-                  <img
-                    key={atual.id}
-                    src={urlImagem(atual.midiaKey, "")}
-                    alt={atual.titulo}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
+            <div className="grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-16">
+              <div className="relative overflow-hidden rounded-2xl bg-secondary/25 shadow-carta">
+                <img
+                  key={atual.id}
+                  src={urlImagem(atual.midiaKey, "")}
+                  alt={atual.titulo}
+                  className="aspect-[4/5] w-full animate-sobe-suave object-cover md:aspect-[5/6]"
+                  loading="lazy"
+                />
               </div>
 
-              <div className="flex flex-col justify-between gap-6 rounded-2xl border border-primary/10 bg-card/80 p-8 shadow-carta">
-                <div>
-                  <p className="rotulo">{`${seguro + 1} de ${lista.length}`}</p>
-                  <h3 className="mt-4 font-display text-3xl leading-tight text-primary">{atual.titulo}</h3>
-                  {atual.descricao && (
-                    <p className="mt-5 text-base leading-relaxed text-foreground/75 whitespace-pre-line">
-                      {atual.descricao}
-                    </p>
-                  )}
-                </div>
+              <div>
+                <p className="rotulo">{`${String(seguro + 1).padStart(2, "0")} — ${String(
+                  lista.length
+                ).padStart(2, "0")}`}</p>
+                <h3 className="mt-5 font-display text-3xl leading-tight text-primary md:text-4xl">
+                  {atual.titulo}
+                </h3>
+                {atual.descricao && (
+                  <p className="mt-6 whitespace-pre-line text-lg leading-relaxed text-foreground/75">
+                    {atual.descricao}
+                  </p>
+                )}
 
                 {lista.length > 1 && (
-                  <div className="flex items-center justify-between gap-3 pt-2">
+                  <div className="mt-10 flex items-center justify-between gap-4 border-t border-border pt-7">
                     <div className="flex items-center gap-2">
                       <button
                         type="button"

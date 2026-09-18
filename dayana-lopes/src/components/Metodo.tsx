@@ -28,9 +28,9 @@ const passos = [
 ];
 
 const Metodo = () => (
-  <section id="metodo" className="scroll-mt-24 py-24 md:py-32">
+  <section id="metodo" className="scroll-mt-24 bg-secondary/30 py-24 md:py-32">
     <div className="container">
-      <div className="revela mx-auto max-w-2xl text-center">
+      <div className="revela max-w-2xl">
         <p className="rotulo">Como funciona</p>
         <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
           Beleza sem exageros.
@@ -38,25 +38,27 @@ const Metodo = () => (
         </h2>
       </div>
 
-      <ol className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-2">
+      <ol className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
         {passos.map((p, i) => (
           <li
             key={p.numero}
             style={{ transitionDelay: `${i * 80}ms` }}
-            className="revela flex gap-5 rounded-2xl border border-border bg-card p-7"
+            className="revela border-t border-primary/20 pt-6"
           >
-            <span className="font-display text-3xl italic text-accent">
+            <span className="font-display text-4xl italic text-accent/70">
               {p.numero}
             </span>
-            <div>
-              <h3 className="font-display text-2xl text-primary">{p.titulo}</h3>
-              <p className="mt-2 leading-relaxed text-foreground/75">{p.texto}</p>
-            </div>
+            <h3 className="mt-5 font-display text-2xl leading-tight text-primary">
+              {p.titulo}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+              {p.texto}
+            </p>
           </li>
         ))}
       </ol>
 
-      <div className="revela mt-12 text-center">
+      <div className="revela mt-16">
         <a
           href={LINK_AGENDAMENTO}
           target="_blank"

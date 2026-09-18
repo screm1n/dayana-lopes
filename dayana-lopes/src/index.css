@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sistema de design — PREENCHER com a paleta do cliente.
-   Paleta tirada da referência: off-white, taupe, café e cinza quente. */
+/* Sistema de design da Dayana Lopes.
+   Paleta rosa/magenta. Não trocar os tokens: o site inteiro depende deles. */
 
 @layer base {
   :root {
@@ -68,6 +68,20 @@
 
   .rotulo {
     @apply text-[0.72rem] font-medium uppercase tracking-[0.32em] text-accent;
+  }
+
+  /* Faixa escura: usa o magenta profundo da paleta como fundo de seção.
+     Tudo dentro dela herda os tons claros, sem espalhar classe por classe. */
+  .faixa-escura {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .faixa-escura .rotulo {
+    @apply text-secondary;
+  }
+
+  .faixa-escura .fio {
+    @apply bg-accent-foreground/40;
   }
 }
 
