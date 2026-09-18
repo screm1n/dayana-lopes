@@ -1,4 +1,4 @@
-import { Instagram, MessageCircleHeart } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   ATENDIMENTO,
   INSTAGRAM,
@@ -6,19 +6,21 @@ import {
   LINK_AGENDAMENTO,
   ROTULO_AGENDAMENTO,
 } from "@/lib/links";
+import Rotulo from "./Rotulo";
 
 const Contato = () => (
-  <section id="contato" className="scroll-mt-24 bg-card py-24 md:py-32">
+  <section id="contato" className="secao scroll-mt-24 bg-card">
     <div className="container">
-      <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+      <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
         <div className="revela">
-          <p className="rotulo">Contato</p>
-          <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
+          <Rotulo numero="07" semFio>
+            Contato
+          </Rotulo>
+          <h2 className="titulo mt-6 text-[2.6rem] md:text-5xl lg:text-[3.4rem]">
             Vamos começar
-            <span className="block italic">com autonomia?</span>
+            <span className="block italic text-accent/85">com autonomia?</span>
           </h2>
-          <span className="mt-8 fio" />
-          <p className="mt-7 max-w-md text-lg leading-relaxed text-foreground/75">
+          <p className="mt-8 max-w-sm leading-relaxed text-foreground/70">
             Entre em contato para tirar dúvidas, entender o acompanhamento e
             agendar sua consulta.
           </p>
@@ -27,51 +29,43 @@ const Contato = () => (
             href={LINK_AGENDAMENTO}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center gap-2.5 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground shadow-carta transition-transform hover:scale-[1.03]"
+            className="botao mt-11"
           >
-            <MessageCircleHeart className="h-5 w-5" strokeWidth={1.8} />
-            Agendar minha consulta
+            Agendar consulta
+            <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
           </a>
         </div>
 
-        <div className="revela rounded-2xl bg-secondary/40 p-8 md:p-10">
-          <ul className="divide-y divide-primary/10">
-            <li className="pb-6">
-              <p className="rotulo">Agendamento</p>
-              <a
-                href={LINK_AGENDAMENTO}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 block font-display text-2xl text-primary transition-colors hover:text-accent"
-              >
-                {ROTULO_AGENDAMENTO}
-              </a>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Fale comigo e agende agora
-              </p>
-            </li>
+        <ul className="revela lg:pt-4">
+          <li className="border-b border-border py-7 first:border-t">
+            <p className="rotulo">Agendamento</p>
+            <a
+              href={LINK_AGENDAMENTO}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="titulo mt-3 block text-3xl transition-colors hover:text-accent"
+            >
+              {ROTULO_AGENDAMENTO}
+            </a>
+          </li>
 
-            <li className="py-6">
-              <p className="rotulo">Instagram</p>
-              <a
-                href={INSTAGRAM}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 flex items-center gap-2.5 font-display text-2xl text-primary transition-colors hover:text-accent"
-              >
-                <Instagram className="h-5 w-5" strokeWidth={1.7} aria-hidden />
-                {INSTAGRAM_HANDLE}
-              </a>
-            </li>
+          <li className="border-b border-border py-7">
+            <p className="rotulo">Instagram</p>
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="titulo mt-3 block text-3xl transition-colors hover:text-accent"
+            >
+              {INSTAGRAM_HANDLE}
+            </a>
+          </li>
 
-            <li className="pt-6">
-              <p className="rotulo">Atendimento</p>
-              <p className="mt-2 font-display text-2xl leading-tight text-primary">
-                {ATENDIMENTO}
-              </p>
-            </li>
-          </ul>
-        </div>
+          <li className="border-b border-border py-7">
+            <p className="rotulo">Atendimento</p>
+            <p className="titulo mt-3 text-3xl">{ATENDIMENTO}</p>
+          </li>
+        </ul>
       </div>
     </div>
   </section>

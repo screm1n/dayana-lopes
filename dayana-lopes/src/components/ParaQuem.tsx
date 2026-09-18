@@ -1,3 +1,5 @@
+import Rotulo from "./Rotulo";
+
 const situacoes = [
   "Quer realçar sua beleza com naturalidade",
   "Busca cuidar da pele e dos seus traços",
@@ -8,37 +10,32 @@ const situacoes = [
 ];
 
 const ParaQuem = () => (
-  <section
-    id="para-quem"
-    className="faixa-escura scroll-mt-24 py-24 md:py-32"
-  >
+  <section id="para-quem" className="faixa-escura secao scroll-mt-24">
     <div className="container">
-      <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+      <div className="grid gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-20">
         <div className="revela self-start">
-          <p className="rotulo">Para quem é</p>
-          <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
+          <Rotulo numero="03" semFio>
+            Para quem é
+          </Rotulo>
+          <h2 className="titulo mt-6 text-[2.6rem] md:text-5xl lg:text-[3.4rem]">
             Se você se reconhecer
             <span className="block italic text-secondary">em alguma dessas,</span>
             a gente precisa conversar.
           </h2>
-          <span className="mt-8 fio" />
-          <p className="mt-7 max-w-md leading-relaxed text-accent-foreground/70">
+          <p className="mt-8 max-w-sm leading-relaxed text-accent-foreground/70">
             O cuidado começa entendendo você e termina com uma versão ainda mais
             sua.
           </p>
         </div>
 
-        <ul className="grid gap-x-10 sm:grid-cols-2">
+        <ul className="grid sm:grid-cols-2 sm:gap-x-12">
           {situacoes.map((s, i) => (
             <li
               key={s}
               style={{ transitionDelay: `${i * 60}ms` }}
-              className="revela flex items-start gap-4 border-b border-accent-foreground/15 py-5"
+              className="revela flex gap-5 border-b border-accent-foreground/20 py-6"
             >
-              <span
-                aria-hidden
-                className="mt-2.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-secondary"
-              />
+              <span className="rotulo pt-1">{String(i + 1).padStart(2, "0")}</span>
               <p className="leading-relaxed text-accent-foreground/90">{s}</p>
             </li>
           ))}

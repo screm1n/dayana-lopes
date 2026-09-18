@@ -5,14 +5,14 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: { DEFAULT: "1.5rem", lg: "2rem" },
-      screens: { "2xl": "1180px" },
+      padding: { DEFAULT: "1.375rem", md: "2.5rem", lg: "4rem", xl: "5rem" },
+      screens: { "2xl": "1320px" },
     },
     extend: {
       fontFamily: {
-        sans: ["'DM Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["'DM Serif Display'", "Georgia", "serif"],
-        sub: ["'DM Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["'Cormorant Garamond'", "Georgia", "serif"],
+        sub: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
@@ -51,8 +51,9 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 6px)",
-        sm: "calc(var(--radius) - 10px)",
+        md: "var(--radius)",
+        sm: "var(--radius)",
+        arco: "45% 45% 2px 2px",
       },
       boxShadow: {
         carta: "var(--sombra-carta)",

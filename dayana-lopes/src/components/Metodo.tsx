@@ -1,4 +1,6 @@
+import { ArrowUpRight } from "lucide-react";
 import { LINK_AGENDAMENTO } from "@/lib/links";
+import Rotulo from "./Rotulo";
 
 const passos = [
   {
@@ -28,29 +30,29 @@ const passos = [
 ];
 
 const Metodo = () => (
-  <section id="metodo" className="scroll-mt-24 bg-secondary/30 py-24 md:py-32">
+  <section id="metodo" className="secao scroll-mt-24 bg-card">
     <div className="container">
       <div className="revela max-w-2xl">
-        <p className="rotulo">Como funciona</p>
-        <h2 className="mt-4 font-display text-4xl leading-tight text-primary md:text-5xl">
+        <Rotulo numero="05" semFio>
+          Como funciona
+        </Rotulo>
+        <h2 className="titulo mt-6 text-[2.6rem] md:text-5xl lg:text-[3.4rem]">
           Beleza sem exageros.
-          <span className="block italic">Com cuidado e intenção.</span>
+          <span className="block italic text-accent/85">Com cuidado e intenção.</span>
         </h2>
       </div>
 
-      <ol className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      <ol className="mt-16 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
         {passos.map((p, i) => (
           <li
             key={p.numero}
             style={{ transitionDelay: `${i * 80}ms` }}
-            className="revela border-t border-primary/20 pt-6"
+            className="revela border-t border-primary/25 pt-7"
           >
-            <span className="font-display text-4xl italic text-accent/70">
+            <span className="font-display text-3xl italic text-accent/75">
               {p.numero}
             </span>
-            <h3 className="mt-5 font-display text-2xl leading-tight text-primary">
-              {p.titulo}
-            </h3>
+            <h3 className="titulo mt-6 text-2xl">{p.titulo}</h3>
             <p className="mt-3 text-sm leading-relaxed text-foreground/70">
               {p.texto}
             </p>
@@ -63,9 +65,10 @@ const Metodo = () => (
           href={LINK_AGENDAMENTO}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground shadow-carta transition-transform hover:scale-[1.03]"
+          className="botao"
         >
           Quero começar
+          <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
         </a>
       </div>
     </div>

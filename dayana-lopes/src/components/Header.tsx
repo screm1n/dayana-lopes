@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { LINK_AGENDAMENTO, NOME, PROFISSAO } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
 import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
-// Segue a nova ordem das seções da página.
 const secoes = [
   { id: "servicos", rotulo: "Serviços" },
   { id: "procedimentos", rotulo: "Procedimentos" },
   { id: "para-quem", rotulo: "Para quem é" },
   { id: "espaco", rotulo: "Atendimento" },
-  { id: "sobre", rotulo: "Sobre mim" },
+  { id: "sobre", rotulo: "Sobre" },
   { id: "contato", rotulo: "Contato" },
 ];
 
@@ -36,14 +35,14 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solido ? "bg-background/95 shadow-carta backdrop-blur" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        solido ? "border-b border-border bg-background/95 backdrop-blur" : "bg-transparent"
       }`}
     >
-      <nav className="container flex items-center justify-between gap-4 py-3">
+      <nav className="container flex items-center justify-between gap-6 py-4">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="flex items-center gap-3 text-left leading-tight"
+          className="flex items-center gap-3 text-left"
           aria-label="Voltar ao topo"
         >
           <ImagemComPlaceholder
@@ -53,19 +52,21 @@ const Header = () => {
             formato="quadrado"
             compacto
             ajuste="contain"
-            className="h-14 w-14 shrink-0 !rounded-md bg-white p-1 shadow-carta md:h-16 md:w-16 md:p-1.5"
+            className={`h-11 w-11 shrink-0 !rounded-none md:h-12 md:w-12 ${
+              solido ? "" : "bg-accent-foreground/95 p-1"
+            }`}
           />
           <span>
             <span
-              className={`block font-display text-xl transition-colors md:text-2xl ${
+              className={`block font-display text-lg uppercase leading-none tracking-[0.18em] transition-colors md:text-xl ${
                 solido ? "text-primary" : "text-accent-foreground"
               }`}
             >
               {NOME}
             </span>
             <span
-              className={`hidden text-[0.52rem] uppercase tracking-[0.16em] transition-colors sm:block md:text-[0.6rem] md:tracking-[0.2em] ${
-                solido ? "text-accent" : "text-accent-foreground/70"
+              className={`mt-1.5 hidden text-[0.55rem] uppercase tracking-[0.22em] transition-colors sm:block ${
+                solido ? "text-muted-foreground" : "text-accent-foreground/60"
               }`}
             >
               {PROFISSAO}
@@ -73,47 +74,48 @@ const Header = () => {
           </span>
         </button>
 
-        <ul className="hidden items-center gap-7 lg:flex">
-          {secoes.map((s) => (
-            <li key={s.id}>
-              <button
-                onClick={() => irPara(s.id)}
-                className={`text-sm transition-colors ${
-                  solido
-                    ? "text-foreground/75 hover:text-primary"
-                    : "text-accent-foreground/80 hover:text-accent-foreground"
-                }`}
-              >
-                {s.rotulo}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden items-center gap-8 lg:flex">
+          <ul className="flex items-center gap-7">
+            {secoes.map((s) => (
+              <li key={s.id}>
+                <button
+                  onClick={() => irPara(s.id)}
+                  className={`text-sm transition-colors ${
+                    solido
+                      ? "text-foreground/70 hover:text-primary"
+                      : "text-accent-foreground/75 hover:text-accent-foreground"
+                  }`}
+                >
+                  {s.rotulo}
+                </button>
+              </li>
+            ))}
+          </ul>
 
-        <div className="flex items-center gap-2">
           <a
             href={LINK_AGENDAMENTO}
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.03] sm:inline-block ${
+            className={`inline-flex items-center gap-2 border-b pb-1.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.16em] transition-colors ${
               solido
-                ? "bg-primary text-primary-foreground"
-                : "bg-accent-foreground text-accent"
+                ? "border-primary/30 text-primary hover:border-primary"
+                : "border-accent-foreground/40 text-accent-foreground hover:border-accent-foreground"
             }`}
           >
             Agendar consulta
+            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
           </a>
-
-          <button
-            onClick={() => setMenuAberto((v) => !v)}
-            className={`rounded-full p-2 transition-colors lg:hidden ${
-              solido ? "text-primary hover:bg-muted" : "text-accent-foreground"
-            }`}
-            aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
-          >
-            {menuAberto ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
+
+        <button
+          onClick={() => setMenuAberto((v) => !v)}
+          className={`p-2 transition-colors lg:hidden ${
+            solido ? "text-primary" : "text-accent-foreground"
+          }`}
+          aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
+        >
+          {menuAberto ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </nav>
 
       {menuAberto && (
@@ -123,20 +125,21 @@ const Header = () => {
               <li key={s.id}>
                 <button
                   onClick={() => irPara(s.id)}
-                  className="w-full border-b border-border/60 py-3.5 text-left font-medium text-foreground/85"
+                  className="w-full border-b border-border/70 py-4 text-left text-sm uppercase tracking-[0.12em] text-foreground/80"
                 >
                   {s.rotulo}
                 </button>
               </li>
             ))}
-            <li className="py-4">
+            <li className="py-5">
               <a
                 href={LINK_AGENDAMENTO}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-full bg-primary px-5 py-3 text-center font-medium text-primary-foreground"
+                className="botao w-full"
               >
                 Agendar consulta
+                <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
               </a>
             </li>
           </ul>

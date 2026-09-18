@@ -19,15 +19,14 @@ const BotaoFlutuante = () => {
       href={LINK_AGENDAMENTO}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Agendar consulta"
-      className={`fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full bg-primary px-5 py-3.5 font-medium text-primary-foreground shadow-lg transition-all duration-300 hover:scale-105 ${
+      aria-label="Fale comigo"
+      className={`fixed bottom-6 right-6 z-40 grid h-14 w-14 place-items-center bg-primary text-primary-foreground shadow-carta transition-all duration-300 hover:bg-accent ${
         visivel
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
-      <MessageCircleHeart className="h-5 w-5" strokeWidth={1.8} aria-hidden />
-      <span className="hidden sm:inline">Agendar consulta</span>
+      <MessageCircleHeart className="h-6 w-6" strokeWidth={1.6} aria-hidden />
     </a>
   );
 };

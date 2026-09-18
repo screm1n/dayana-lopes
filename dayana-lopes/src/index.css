@@ -35,7 +35,7 @@
     --input: 327 24% 84%;
     --ring: 335 41% 52%;
 
-    --radius: 1rem;
+    --radius: 2px;
 
     --sombra-carta: 0 2px 28px -16px hsl(325 25% 18% / 0.28);
   }
@@ -55,6 +55,13 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
+  /* Cormorant é uma serifa clara: sem isso os títulos ficam pesados demais. */
+  h1,
+  h2,
+  h3 {
+    font-weight: 400;
+  }
+
   ::selection {
     background: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
@@ -62,12 +69,40 @@
 }
 
 @layer components {
+  /* Fio de cabelo: a divisória que estrutura a página inteira. */
   .fio {
-    @apply block h-px w-14 bg-accent/70;
+    @apply block h-px w-full bg-primary/20;
   }
 
+  /* Rótulo de seção: Manrope, caixa alta, muito espaçado. */
   .rotulo {
-    @apply text-[0.72rem] font-medium uppercase tracking-[0.32em] text-accent;
+    @apply font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-accent;
+  }
+
+  /* Títulos: serifa clara, entrelinha curta e tracking negativo. */
+  .titulo {
+    @apply font-display font-normal leading-[1.02] tracking-[-0.035em] text-primary;
+  }
+
+  /* Botão principal: retângulo seco, sem raio, rótulo em caixa alta. */
+  .botao {
+    @apply inline-flex items-center justify-center gap-3 rounded-none bg-primary px-8 py-4
+      font-sans text-[0.78rem] font-medium uppercase tracking-[0.14em]
+      text-primary-foreground transition-colors hover:bg-accent;
+  }
+
+  /* Mesmo botão, invertido para as faixas escuras. */
+  .botao-claro {
+    @apply inline-flex items-center justify-center gap-3 rounded-none bg-accent-foreground px-8 py-4
+      font-sans text-[0.78rem] font-medium uppercase tracking-[0.14em]
+      text-accent transition-opacity hover:opacity-90;
+  }
+
+  /* Ação secundária: link sublinhado por um fio, nunca um botão. */
+  .link-fio {
+    @apply inline-flex items-center gap-3 border-b border-primary/30 pb-2.5
+      font-sans text-[0.78rem] font-medium uppercase tracking-[0.14em]
+      text-primary transition-colors hover:border-primary;
   }
 
   /* Faixa escura: usa o magenta profundo da paleta como fundo de seção.
@@ -80,8 +115,31 @@
     @apply text-secondary;
   }
 
+  .faixa-escura .titulo {
+    @apply text-accent-foreground;
+  }
+
   .faixa-escura .fio {
-    @apply bg-accent-foreground/40;
+    @apply bg-accent-foreground/25;
+  }
+
+  .faixa-escura .link-fio {
+    @apply border-accent-foreground/35 text-accent-foreground hover:border-accent-foreground;
+  }
+
+  /* Ritmo vertical único para todas as seções. */
+  .secao {
+    padding-top: clamp(4.75rem, 8.3vw, 8.5rem);
+    padding-bottom: clamp(4.75rem, 8.3vw, 8.5rem);
+  }
+
+  /* Numeração em série (01, 02...), sempre na serifa. */
+  .numero {
+    @apply font-display text-2xl font-normal leading-none text-accent/70;
+  }
+
+  .faixa-escura .numero {
+    @apply text-secondary/80;
   }
 }
 
