@@ -8,31 +8,48 @@ export type ProcedimentoDto = {
   ordem: number;
 };
 
+type SlotImagem =
+  | "logo"
+  | "espaco"
+  | "perfil"
+  | "menu1"
+  | "menu2"
+  | "menu3"
+  | "menu4"
+  | "menu5"
+  | "menu6"
+  | "menu7"
+  | "menu8";
+
 export type ConteudoDto = {
   procedimentos: ProcedimentoDto[];
-  imagens: {
-    logo?: string | null;
-    /** O terceiro slot nasceu como logo da clínica e hoje guarda a foto do
-     *  espaço. A chave na Function e no Blob continua `logoClinica` — só o
-     *  nome exposto ao front mudou, para não migrar dado gravado. */
-    espaco?: string | null;
-    perfil?: string | null;
-  };
+  /* O terceiro slot nasceu como logo da clínica e hoje guarda a foto do
+     espaço. A chave na Function e no Blob continua `logoClinica`; só o
+     nome exposto ao front mudou, para não migrar dado gravado. */
+  imagens: Partial<Record<SlotImagem, string | null>>;
 };
 
 /** O que a Function `conteudo` devolve, com os nomes de chave originais. */
+type ChaveWire =
+  | "logo"
+  | "logoClinica"
+  | "perfil"
+  | "menu1"
+  | "menu2"
+  | "menu3"
+  | "menu4"
+  | "menu5"
+  | "menu6"
+  | "menu7"
+  | "menu8";
 type ConteudoWire = {
   procedimentos?: ProcedimentoDto[];
-  imagens?: {
-    logo?: string | null;
-    logoClinica?: string | null;
-    perfil?: string | null;
-  };
+  imagens?: Partial<Record<ChaveWire, string | null>>;
 };
 
 const INICIAL: ConteudoDto = {
   procedimentos: [],
-  imagens: { logo: null, espaco: null, perfil: null },
+  imagens: {},
 };
 
 /** Retorna a URL certa para uma imagem gerenciada: se houver override no Blob usa a Function `midia`,
@@ -58,14 +75,20 @@ function notificar() {
 }
 
 function normalizar(dados: ConteudoWire): ConteudoDto {
+  const img = dados.imagens ?? {};
+  const menu = Object.fromEntries(
+    Array.from({ length: 8 }, (_, i) => [`menu${i + 1}`, img[`menu${i + 1}` as ChaveWire] ?? null]),
+  );
   return {
     procedimentos: Array.isArray(dados.procedimentos)
       ? [...dados.procedimentos].sort((a, b) => a.ordem - b.ordem)
       : [],
     imagens: {
-      logo: dados.imagens?.logo ?? null,
-      espaco: dados.imagens?.logoClinica ?? null,
-      perfil: dados.imagens?.perfil ?? null,
+      logo: img.logo ?? null,
+      // A chave no Blob continua logoClinica; expomos como `espaco`.
+      espaco: img.logoClinica ?? null,
+      perfil: img.perfil ?? null,
+      ...menu,
     },
   };
 }

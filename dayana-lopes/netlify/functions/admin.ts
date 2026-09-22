@@ -1,6 +1,7 @@
 // POST /.netlify/functions/admin
 // Painel administrativo. Todo request precisa do header x-admin-senha valido.
 import {
+  ALVOS_IMAGEM,
   CONTEUDO_INICIAL,
   lerConteudo,
   gravarConteudo,
@@ -8,6 +9,7 @@ import {
   senhaValida,
   json,
   novoId,
+  type AlvoImagem,
   type Procedimento,
 } from "./_lib";
 
@@ -16,8 +18,8 @@ type Corpo =
   | { acao: "salvarProcedimento"; id?: string; titulo: string; descricao: string; imagemBase64?: string; imagemTipo?: string }
   | { acao: "excluirProcedimento"; id: string }
   | { acao: "reordenar"; ids: string[] }
-  | { acao: "trocarImagem"; alvo: "logo" | "logoClinica" | "perfil"; imagemBase64: string; imagemTipo: string }
-  | { acao: "restaurarImagem"; alvo: "logo" | "logoClinica" | "perfil" };
+  | { acao: "trocarImagem"; alvo: AlvoImagem; imagemBase64: string; imagemTipo: string }
+  | { acao: "restaurarImagem"; alvo: AlvoImagem };
 
 const TIPOS_ACEITOS = new Set(["image/jpeg", "image/png", "image/webp"]);
 const TAMANHO_MAX_BYTES = 4 * 1024 * 1024; // 4 MB apos redimensionamento
@@ -134,7 +136,7 @@ export default async (req: Request) => {
       }
 
       case "trocarImagem": {
-        if (!["logo", "logoClinica", "perfil"].includes(corpo.alvo))
+        if (!(ALVOS_IMAGEM as readonly string[]).includes(corpo.alvo))
           return json(400, { erro: "alvo invalido" });
         const c = await lerConteudo();
         const anterior = c.imagens[corpo.alvo];
@@ -146,7 +148,7 @@ export default async (req: Request) => {
       }
 
       case "restaurarImagem": {
-        if (!["logo", "logoClinica", "perfil"].includes(corpo.alvo))
+        if (!(ALVOS_IMAGEM as readonly string[]).includes(corpo.alvo))
           return json(400, { erro: "alvo invalido" });
         const c = await lerConteudo();
         const anterior = c.imagens[corpo.alvo];

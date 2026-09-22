@@ -9,11 +9,23 @@ export type Procedimento = {
   ordem: number;
 };
 
-export type OverrideImagens = {
-  logo?: string | null;
-  logoClinica?: string | null;
-  perfil?: string | null;
-};
+/* Cada alvo aqui vira uma opcao de troca no /admin. A chave e usada como
+   nome do arquivo do Blob, entao nao renomear depois de gravado. */
+export const ALVOS_IMAGEM = [
+  "logo",
+  "logoClinica",
+  "perfil",
+  "menu1",
+  "menu2",
+  "menu3",
+  "menu4",
+  "menu5",
+  "menu6",
+  "menu7",
+  "menu8",
+] as const;
+export type AlvoImagem = (typeof ALVOS_IMAGEM)[number];
+export type OverrideImagens = Partial<Record<AlvoImagem, string | null>>;
 
 export type Conteudo = {
   procedimentos: Procedimento[];
@@ -22,7 +34,7 @@ export type Conteudo = {
 
 export const CONTEUDO_INICIAL: Conteudo = {
   procedimentos: [],
-  imagens: { logo: null, logoClinica: null, perfil: null },
+  imagens: Object.fromEntries(ALVOS_IMAGEM.map((a) => [a, null])) as OverrideImagens,
 };
 
 export const CHAVE_CONTEUDO = "conteudo";
@@ -36,11 +48,9 @@ export async function lerConteudo(): Promise<Conteudo> {
   const c = salvo as Partial<Conteudo>;
   return {
     procedimentos: Array.isArray(c.procedimentos) ? c.procedimentos : [],
-    imagens: {
-      logo: c.imagens?.logo ?? null,
-      logoClinica: c.imagens?.logoClinica ?? null,
-      perfil: c.imagens?.perfil ?? null,
-    },
+    imagens: Object.fromEntries(
+      ALVOS_IMAGEM.map((a) => [a, c.imagens?.[a] ?? null]),
+    ) as OverrideImagens,
   };
 }
 

@@ -1,11 +1,15 @@
 import { useRef, useState } from "react";
+import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // As oito imagens em /public são as páginas do menu impresso da clínica.
 // Por isso a seção é um leitor paginado, e não uma galeria decorativa.
-const paginas = Array.from({ length: 8 }, (_, i) => `/${i + 1}.png`);
+const CHAVES = Array.from({ length: 8 }, (_, i) => `menu${i + 1}` as const);
 
 const MenuProcedimentos = () => {
+  const { conteudo } = useConteudo();
+  // A chave no Blob e a fallback em /public: /1.png ate /8.png.
+  const paginas = CHAVES.map((k, i) => urlImagem(conteudo.imagens[k], `/${i + 1}.png`));
   const [indice, setIndice] = useState(0);
   const total = paginas.length;
   const ir = (passo: number) => setIndice((i) => (i + passo + total) % total);

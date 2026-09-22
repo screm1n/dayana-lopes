@@ -5,14 +5,55 @@ import { atualizarConteudoLocal, urlImagem, type ConteudoDto, type ProcedimentoD
 
 const CHAVE_SENHA = "dayana_admin_senha";
 
-type Alvo = "logo" | "logoClinica" | "perfil";
+/* A chave "logoClinica" continua por causa do que ja esta gravado no Blob;
+   internamente ela e a foto do espaco.
+   Chaves menu1..menu8 sao as 8 paginas do menu impresso. */
+type Alvo =
+  | "logo"
+  | "logoClinica"
+  | "perfil"
+  | "menu1"
+  | "menu2"
+  | "menu3"
+  | "menu4"
+  | "menu5"
+  | "menu6"
+  | "menu7"
+  | "menu8";
 
-const ROTULOS_IMAGEM: Record<Alvo, { titulo: string; ajuda: string; estatico: string }> = {
-  logo: { titulo: "Logo da marca", ajuda: "aparece no cabeçalho e no rodapé", estatico: "/logo.png" },
-  perfil: { titulo: "Foto de perfil", ajuda: "foto principal ao lado do título", estatico: "/perfil.jpg" },
-  // A chave continua logoClinica por causa do que já está gravado no Blob.
-  logoClinica: { titulo: "Foto do espaço", ajuda: "consultório, na seção de atendimento e no contato", estatico: "/espaco.jpg" },
-};
+type MetaImagem = { titulo: string; secao: string; estatico: string };
+
+// Agrupado por bloco visual. A ordem aqui vira a ordem dos cards no painel.
+const GRUPOS_IMAGEM: { rotulo: string; itens: [Alvo, MetaImagem][] }[] = [
+  {
+    rotulo: "marca",
+    itens: [
+      ["logo", { titulo: "Logo", secao: "Cabecalho e rodape", estatico: "/logo.png" }],
+    ],
+  },
+  {
+    rotulo: "voce",
+    itens: [
+      ["perfil", { titulo: "Foto principal", secao: "Hero, Para quem e, Sobre mim", estatico: "/perfil.jpg" }],
+      ["logoClinica", { titulo: "Foto do consultorio", secao: "Atendimento e Contato", estatico: "/espaco.jpg" }],
+    ],
+  },
+  {
+    rotulo: "menu de procedimentos",
+    itens: Array.from({ length: 8 }, (_, i) => {
+      const n = i + 1;
+      const alvo = (`menu${n}`) as Alvo;
+      return [
+        alvo,
+        { titulo: `Pagina ${String(n).padStart(2, "0")}`, secao: "Menu de procedimentos", estatico: `/${n}.png` },
+      ] as [Alvo, MetaImagem];
+    }),
+  },
+];
+
+const ROTULOS_IMAGEM: Record<Alvo, MetaImagem> = Object.fromEntries(
+  GRUPOS_IMAGEM.flatMap((g) => g.itens),
+) as Record<Alvo, MetaImagem>;
 
 export default function Admin() {
   const [senha, setSenha] = useState("");
@@ -517,10 +558,14 @@ function AbaImagens({
   conteudo: ConteudoDto | null;
   chamar: (corpo: unknown) => Promise<unknown>;
 }) {
-  const overrides: Partial<Record<Alvo, string | null>> = {
-    logo: conteudo?.imagens?.logo ?? null,
-    perfil: conteudo?.imagens?.perfil ?? null,
-    logoClinica: conteudo?.imagens?.espaco ?? null,
+  // A foto do consultorio ainda esta guardada na chave `espaco` do front,
+  // que corresponde ao slot `logoClinica` no Blob.
+  const chaveDo = (alvo: Alvo): string | null => {
+    if (alvo === "logoClinica")
+      return (conteudo?.imagens as Record<string, string | null | undefined>)?.espaco ?? null;
+    return (
+      (conteudo?.imagens as Record<string, string | null | undefined>)?.[alvo] ?? null
+    );
   };
 
   return (
@@ -528,19 +573,26 @@ function AbaImagens({
       <div>
         <h2 className="font-display text-xl text-primary">imagens do site</h2>
         <p className="mt-1 text-sm text-foreground/60">
-          troque logo e foto de perfil. você pode voltar para a imagem original quando quiser.
+          troque qualquer foto do site. quando voce sobe uma nova, a antiga e apagada; da pra voltar para a imagem original quando quiser.
         </p>
       </div>
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {(Object.keys(ROTULOS_IMAGEM) as Alvo[]).map((alvo) => (
-          <CartaoImagem
-            key={alvo}
-            alvo={alvo}
-            chaveBlob={overrides[alvo] ?? null}
-            chamar={chamar}
-          />
-        ))}
-      </div>
+      {GRUPOS_IMAGEM.map((grupo) => (
+        <div key={grupo.rotulo} className="mt-10">
+          <p className="text-xs uppercase tracking-[0.2em] text-foreground/45">
+            {grupo.rotulo}
+          </p>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {grupo.itens.map(([alvo]) => (
+              <CartaoImagem
+                key={alvo}
+                alvo={alvo}
+                chaveBlob={chaveDo(alvo)}
+                chamar={chamar}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -597,7 +649,7 @@ function CartaoImagem({
   return (
     <div className="rounded-2xl border border-primary/10 bg-card p-5 shadow-carta">
       <p className="rotulo">{meta.titulo}</p>
-      <p className="mt-1 text-xs text-foreground/50">{meta.ajuda}</p>
+      <p className="mt-1 text-xs text-foreground/50">{meta.secao}</p>
       <div className="mt-4 grid aspect-square place-items-center overflow-hidden rounded-xl bg-secondary/40">
         <img
           src={src}
