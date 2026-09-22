@@ -2009,3 +2009,25 @@ to {
       var(--forest) 96%);
   }
 }
+
+/* Dica de uso do leitor do menu de procedimentos. */
+.menu-dica {
+  margin-top: 20px;
+  font-size: 13px;
+  letter-spacing: .04em;
+  font-style: italic;
+  color: var(--muted);
+}
+/* O gesto de arraste da o cursor de grab e desativa o menu de contexto
+   do desenho, pra ninguem sair puxando a imagem sem querer. */
+.menu-leitor {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+.menu-leitor:active {
+  cursor: grabbing;
+}
+.menu-leitor img {
+  -webkit-user-drag: none;
+}

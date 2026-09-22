@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // As oito imagens em /public são as páginas do menu impresso da clínica.
@@ -9,6 +9,17 @@ const MenuProcedimentos = () => {
   const [indice, setIndice] = useState(0);
   const total = paginas.length;
   const ir = (passo: number) => setIndice((i) => (i + passo + total) % total);
+
+  // Suporte a arraste: mouse e touch. Passa quando o gesto supera 40px.
+  const inicio = useRef<number | null>(null);
+  const iniciar = (x: number) => (inicio.current = x);
+  const terminar = (x: number) => {
+    if (inicio.current === null) return;
+    const delta = x - inicio.current;
+    inicio.current = null;
+    if (Math.abs(delta) < 40) return;
+    ir(delta < 0 ? 1 : -1);
+  };
 
   return (
     <section className="results section" id="menu">
@@ -24,15 +35,26 @@ const MenuProcedimentos = () => {
             Procedimentos pensados para valorizar seus traços e cuidar de você
             em cada detalhe. Folheie o menu completo.
           </p>
+          <p className="menu-dica">
+            Clique na seta ou arraste pro lado para passar.
+          </p>
         </div>
 
         <div className="reveal reveal-image reveal-pending">
-          <figure className="menu-leitor">
+          <figure
+            className="menu-leitor"
+            onPointerDown={(e) => iniciar(e.clientX)}
+            onPointerUp={(e) => terminar(e.clientX)}
+            onPointerCancel={() => (inicio.current = null)}
+            onTouchStart={(e) => iniciar(e.touches[0].clientX)}
+            onTouchEnd={(e) => terminar(e.changedTouches[0].clientX)}
+          >
             <img
               key={paginas[indice]}
               src={paginas[indice]}
               alt={`Menu de procedimentos, página ${indice + 1} de ${total}`}
               loading="lazy"
+              draggable={false}
             />
             <figcaption>
               <div className="menu-controles">
