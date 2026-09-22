@@ -1,4 +1,5 @@
-import Rotulo from "./Rotulo";
+import { ArrowUpRight } from "lucide-react";
+import { LINK_AGENDAMENTO } from "@/lib/links";
 
 const situacoes = [
   "Quer realçar sua beleza com naturalidade",
@@ -10,36 +11,52 @@ const situacoes = [
 ];
 
 const ParaQuem = () => (
-  <section id="para-quem" className="faixa-escura secao scroll-mt-24">
-    <div className="container">
-      <div className="grid gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-20">
-        <div className="revela self-start">
-          <Rotulo numero="03" semFio>
-            Para quem é
-          </Rotulo>
-          <h2 className="titulo mt-6 text-[2.6rem] md:text-5xl lg:text-[3.4rem]">
-            Se você se reconhecer
-            <span className="block italic text-secondary">em alguma dessas,</span>
-            a gente precisa conversar.
-          </h2>
-          <p className="mt-8 max-w-sm leading-relaxed text-accent-foreground/70">
-            O cuidado começa entendendo você e termina com uma versão ainda mais
-            sua.
-          </p>
-        </div>
+  <section id="para-quem" className="body-section">
+    <div className="container body-layout">
+      <div className="reveal reveal-fade reveal-pending body-copy">
+        <p className="eyebrow">02 / PARA QUEM É</p>
+        <h2>
+          Se você se
+          <br />
+          reconhecer <em>em alguma delas.</em>
+        </h2>
+        <p>
+          O cuidado começa entendendo você e termina com uma versão ainda mais
+          sua.
+        </p>
+        <a
+          className="text-link"
+          href={LINK_AGENDAMENTO}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          A gente precisa conversar <ArrowUpRight aria-hidden />
+        </a>
+      </div>
 
-        <ul className="grid sm:grid-cols-2 sm:gap-x-12">
+      <div>
+        <div className="reveal reveal-image reveal-pending">
+          <img
+            className="body-image"
+            src="/1.png"
+            alt="Dra. Dayana Lopes em seu atendimento"
+            loading="lazy"
+          />
+        </div>
+        <div className="body-treatments">
           {situacoes.map((s, i) => (
-            <li
+            <a
               key={s}
-              style={{ transitionDelay: `${i * 60}ms` }}
-              className="revela flex gap-5 border-b border-accent-foreground/20 py-6"
+              href={LINK_AGENDAMENTO}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span className="rotulo pt-1">{String(i + 1).padStart(2, "0")}</span>
-              <p className="leading-relaxed text-accent-foreground/90">{s}</p>
-            </li>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              {s}
+              <ArrowUpRight aria-hidden />
+            </a>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   </section>

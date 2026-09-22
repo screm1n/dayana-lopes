@@ -1,113 +1,156 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { LINK_AGENDAMENTO } from "@/lib/links";
 import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
-import Rotulo from "./Rotulo";
 
-// A lista vem do painel /admin (Netlify Blobs). Só a apresentação mudou —
-// os dados continuam saindo de useConteudo() e as imagens de urlImagem().
+/**
+ * Seção narrativa dos procedimentos: a foto fica fixa à esquerda e troca
+ * conforme a pessoa rola a lista da direita.
+ *
+ * A lista inteira vem do painel /admin (Netlify Blobs) — este componente só
+ * apresenta o que `useConteudo()` devolve e monta as URLs com `urlImagem()`.
+ */
 const Procedimentos = () => {
   const { conteudo, carregando } = useConteudo();
   const lista = conteudo.procedimentos;
-  const [indice, setIndice] = useState(0);
+  const [ativo, setAtivo] = useState(0);
+  const secaoRef = useRef<HTMLElement>(null);
 
-  const seguro = Math.min(indice, Math.max(0, lista.length - 1));
+  // Descobre qual etapa está na faixa de leitura e sincroniza a foto.
+  useEffect(() => {
+    if (!lista.length) return;
+    const etapas = Array.from(
+      secaoRef.current?.querySelectorAll<HTMLElement>("[data-etapa]") ?? []
+    );
+    if (!etapas.length || !("IntersectionObserver" in window)) return;
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        const visivel = entradas
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visivel) return;
+        const i = Number((visivel.target as HTMLElement).dataset.etapa);
+        if (!Number.isNaN(i)) setAtivo(i);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+
+    etapas.forEach((el) => observador.observe(el));
+    return () => observador.disconnect();
+  }, [lista.length]);
+
+  const seguro = Math.min(ativo, Math.max(0, lista.length - 1));
   const atual = lista[seguro];
 
-  const Cabecalho = (
+  const Titulo = (
     <>
-      <Rotulo numero="02" semFio>
-        Procedimentos
-      </Rotulo>
-      <h2 className="titulo mt-6 text-[2.6rem] md:text-5xl lg:text-[3.4rem]">
+      <p className="eyebrow">01 / PROCEDIMENTOS</p>
+      <h2>
         Cada procedimento,
-        <span className="block italic text-accent/85">um cuidado único.</span>
+        <br />
+        <em>um cuidado único.</em>
       </h2>
-      <p className="mt-7 max-w-sm leading-relaxed text-foreground/70">
-        Conheça os tratamentos que ofereço, pensados para valorizar sua beleza
-        natural com técnica e delicadeza.
-      </p>
     </>
   );
 
+  if (carregando) {
+    return (
+      <section id="procedimentos" className="section facial facial-story container">
+        {Titulo}
+        <p className="footnote">carregando…</p>
+      </section>
+    );
+  }
+
+  if (!lista.length) {
+    return (
+      <section id="procedimentos" className="section facial facial-story container">
+        {Titulo}
+        <p className="section-note">
+          Os procedimentos estão sendo preparados com carinho.
+        </p>
+        <p className="footnote">Em breve, a lista completa aparece aqui.</p>
+      </section>
+    );
+  }
+
   return (
-    <section id="procedimentos" className="secao scroll-mt-24">
-      <div className="container">
-        {carregando ? (
-          <div>
-            {Cabecalho}
-            <p className="mt-16 text-sm text-foreground/40">carregando…</p>
-          </div>
-        ) : lista.length === 0 ? (
-          <div>
-            {Cabecalho}
-            <div className="mt-14 border-t border-border pt-14">
-              <p className="rotulo">Em breve</p>
-              <p className="titulo mt-5 max-w-lg text-3xl italic">
-                Os procedimentos estão sendo preparados com carinho.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
-            <div className="revela">
-              {Cabecalho}
+    <section
+      id="procedimentos"
+      className="section facial facial-story container"
+      data-enhanced="true"
+      ref={secaoRef}
+    >
+      <div className="story-layout">
+        <div className="story-sticky">
+          {Titulo}
 
-              {/* Imagem em arco, trocando conforme o item selecionado. */}
-              <div className="mt-12 overflow-hidden rounded-arco bg-secondary/30">
-                <img
-                  key={atual.id}
-                  src={urlImagem(atual.midiaKey, "")}
-                  alt={atual.titulo}
-                  className="aspect-[4/5] w-full animate-sobe-suave object-cover"
-                  loading="lazy"
-                />
+          <div className="story-photo">
+            {lista.map((p, i) => (
+              <img
+                key={p.id}
+                className={`story-image ${i === seguro ? "is-active" : ""}`}
+                src={urlImagem(p.midiaKey, "")}
+                alt={p.titulo}
+                aria-hidden={i !== seguro}
+                loading="lazy"
+              />
+            ))}
+          </div>
+
+          <div
+            className="story-status"
+            aria-label={`Procedimento ${seguro + 1} de ${lista.length}`}
+          >
+            <span>
+              {String(seguro + 1).padStart(2, "0")}
+              <small>/ {String(lista.length).padStart(2, "0")}</small>
+            </span>
+            <span>{atual.titulo}</span>
+          </div>
+
+          <div className="story-progress" aria-hidden="true">
+            <span
+              style={{ width: `${((seguro + 1) / lista.length) * 100}%` }}
+            />
+          </div>
+
+          <p className="footnote">O cuidado começa na avaliação.</p>
+        </div>
+
+        <div className="story-stages">
+          {lista.map((p, i) => (
+            <article
+              key={p.id}
+              data-etapa={i}
+              className={`facial-stage ${i === seguro ? "is-active" : ""}`}
+            >
+              <img
+                className="stage-mobile-image"
+                src={urlImagem(p.midiaKey, "")}
+                alt={p.titulo}
+                loading="lazy"
+              />
+              <div className="stage-copy">
+                <span className="number">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{p.titulo}</h3>
+                {p.descricao && <p>{p.descricao}</p>}
+                <a
+                  className="text-link"
+                  href={LINK_AGENDAMENTO}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Tirar dúvidas <ArrowUpRight aria-hidden />
+                </a>
               </div>
-
-              <div className="mt-6 flex items-baseline justify-between gap-4 border-t border-border pt-5">
-                <p className="font-display text-2xl text-accent/80">
-                  {String(seguro + 1).padStart(2, "0")}
-                  <span className="ml-2 text-sm tracking-[0.1em] text-muted-foreground">
-                    / {String(lista.length).padStart(2, "0")}
-                  </span>
-                </p>
-                <p className="text-sm text-muted-foreground">{atual.titulo}</p>
-              </div>
-            </div>
-
-            <ul className="lg:pt-4">
-              {lista.map((p, i) => {
-                const ativo = i === seguro;
-                return (
-                  <li key={p.id} className="border-b border-border first:border-t lg:first:border-t-0">
-                    <button
-                      type="button"
-                      onClick={() => setIndice(i)}
-                      aria-current={ativo}
-                      className={`flex w-full gap-6 border-l-2 py-9 pl-6 text-left transition-colors md:py-11 ${
-                        ativo ? "border-accent" : "border-transparent hover:border-border"
-                      }`}
-                    >
-                      <span className="rotulo pt-2.5">{String(i + 1).padStart(2, "0")}</span>
-                      <span className="flex-1">
-                        <span
-                          className={`titulo block text-3xl transition-colors md:text-4xl ${
-                            ativo ? "text-primary" : "text-primary/55"
-                          }`}
-                        >
-                          {p.titulo}
-                        </span>
-                        {p.descricao && (
-                          <span className="mt-4 block max-w-xl whitespace-pre-line leading-relaxed text-foreground/70">
-                            {p.descricao}
-                          </span>
-                        )}
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
+            </article>
+          ))}
+          <p className="footnote">
+            Cada pele é uma história. Seu procedimento também.
+          </p>
+        </div>
       </div>
     </section>
   );

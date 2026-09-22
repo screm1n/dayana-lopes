@@ -1,74 +1,86 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import {
   ATENDIMENTO,
+  CIDADE,
   INSTAGRAM,
   INSTAGRAM_HANDLE,
   LINK_AGENDAMENTO,
+  NOME_CLINICA,
   ROTULO_AGENDAMENTO,
 } from "@/lib/links";
-import Rotulo from "./Rotulo";
+import { ImagemComPlaceholder } from "./Placeholder";
+import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
-const Contato = () => (
-  <section id="contato" className="secao scroll-mt-24 bg-card">
-    <div className="container">
-      <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
-        <div className="revela">
-          <Rotulo numero="07" semFio>
-            Contato
-          </Rotulo>
-          <h2 className="titulo mt-6 text-[2.6rem] md:text-5xl lg:text-[3.4rem]">
-            Vamos começar
-            <span className="block italic text-accent/85">com autonomia?</span>
-          </h2>
-          <p className="mt-8 max-w-sm leading-relaxed text-foreground/70">
-            Entre em contato para tirar dúvidas, entender o acompanhamento e
-            agendar sua consulta.
-          </p>
+const Contato = () => {
+  const { conteudo } = useConteudo();
+  const srcLogoClinica = urlImagem(conteudo.imagens.logoClinica, "/logo-clinica.png");
 
-          <a
-            href={LINK_AGENDAMENTO}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="botao mt-11"
-          >
-            Agendar consulta
-            <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
-          </a>
-        </div>
+  return (
+    <section id="contato" className="contact section container">
+      <div className="reveal reveal-fade reveal-pending">
+        <p className="eyebrow">08 / VAMOS COMEÇAR</p>
+        <h2>
+          Vamos cuidar
+          <br />
+          de <em>você?</em>
+        </h2>
+        <p>
+          Entre em contato para tirar dúvidas, entender o acompanhamento e
+          agendar sua consulta.
+        </p>
+        <a
+          className="button dark"
+          href={LINK_AGENDAMENTO}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar consulta <ArrowUpRight aria-hidden />
+        </a>
 
-        <ul className="revela lg:pt-4">
-          <li className="border-b border-border py-7 first:border-t">
-            <p className="rotulo">Agendamento</p>
-            <a
-              href={LINK_AGENDAMENTO}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="titulo mt-3 block text-3xl transition-colors hover:text-accent"
-            >
-              {ROTULO_AGENDAMENTO}
-            </a>
-          </li>
-
-          <li className="border-b border-border py-7">
-            <p className="rotulo">Instagram</p>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="titulo mt-3 block text-3xl transition-colors hover:text-accent"
-            >
-              {INSTAGRAM_HANDLE}
-            </a>
-          </li>
-
-          <li className="border-b border-border py-7">
-            <p className="rotulo">Atendimento</p>
-            <p className="titulo mt-3 text-3xl">{ATENDIMENTO}</p>
-          </li>
-        </ul>
+        <dl>
+          <div>
+            <dt>ONDE ATENDO</dt>
+            <dd>{ATENDIMENTO}</dd>
+          </div>
+          <div>
+            <dt>FALE COMIGO</dt>
+            <dd>
+              <a href={LINK_AGENDAMENTO} target="_blank" rel="noopener noreferrer">
+                {ROTULO_AGENDAMENTO}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>INSTAGRAM</dt>
+            <dd>
+              <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                {INSTAGRAM_HANDLE}
+              </a>
+            </dd>
+          </div>
+        </dl>
       </div>
-    </div>
-  </section>
-);
+
+      <div className="reveal reveal-image reveal-pending contact-place painel-marca">
+        <ImagemComPlaceholder
+          src={srcLogoClinica}
+          arquivoPendente="logo-clinica.png"
+          alt={NOME_CLINICA}
+          formato="quadrado"
+          compacto
+          ajuste="contain"
+        />
+        <div>
+          <MapPin aria-hidden />
+          <span>
+            {CIDADE.split(",")[0]}
+            <br />
+            <small>{NOME_CLINICA}</small>
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Contato;

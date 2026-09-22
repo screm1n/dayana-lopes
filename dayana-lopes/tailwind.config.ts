@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["'Cormorant Garamond'", "Georgia", "serif"],
+        display: ["'EB Garamond'", "Georgia", "serif"],
         sub: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {

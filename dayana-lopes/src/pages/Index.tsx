@@ -1,39 +1,48 @@
-import Header from "@/components/Header";
+import Cabecalho from "@/components/Cabecalho";
 import Hero from "@/components/Hero";
-import Destaque from "@/components/Destaque";
-import Servicos from "@/components/Servicos";
+import Diferenciais from "@/components/Diferenciais";
 import Procedimentos from "@/components/Procedimentos";
-import Sobre from "@/components/Sobre";
-import Metodo from "@/components/Metodo";
 import ParaQuem from "@/components/ParaQuem";
-import Espaco from "@/components/Espaco";
+import Experiencia from "@/components/Experiencia";
+import MenuProcedimentos from "@/components/MenuProcedimentos";
+import Metodo from "@/components/Metodo";
+import Sobre from "@/components/Sobre";
+import Depoimentos from "@/components/Depoimentos";
+import Duvidas from "@/components/Duvidas";
 import Contato from "@/components/Contato";
-import Footer from "@/components/Footer";
-import CtaFinal from "@/components/CtaFinal";
+import ChamadaFinal from "@/components/ChamadaFinal";
+import Rodape from "@/components/Rodape";
 import BotaoFlutuante from "@/components/BotaoFlutuante";
-import { useRevela } from "@/hooks/use-revela";
+import { useProgressoRolagem, useRevela } from "@/hooks/use-revela";
 
 const Index = () => {
   useRevela();
+  useProgressoRolagem();
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
+    <>
+      <a href="#main" className="skip-link">
+        Pular para o conteúdo
+      </a>
+      <div className="scroll-progress" />
+      <Cabecalho />
+      <main id="main">
         <Hero />
-        <Destaque />
-        <Servicos />
+        <Diferenciais />
         <Procedimentos />
         <ParaQuem />
-        <Espaco />
+        <Experiencia />
+        <MenuProcedimentos />
         <Metodo />
         <Sobre />
+        <Depoimentos />
+        <Duvidas />
         <Contato />
-        <CtaFinal />
+        <ChamadaFinal />
       </main>
-      <Footer />
+      <Rodape />
       <BotaoFlutuante />
-    </div>
+    </>
   );
 };
 
