@@ -2074,3 +2074,9 @@ to {
     padding-bottom: 40px;
   }
 }
+
+/* O italico "em alguma delas." estava usando --champagne, que
+   sumia no fundo magenta. Rosa muito claro pra contraste, igual ao hero. */
+.body-copy h2 em {
+  color: #f4d5e3;
+}
