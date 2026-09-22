@@ -1954,16 +1954,20 @@ to {
    pra a foto nao dominar o titulo (2026-09-21).
    =================================================================== */
 .hero-shade {
+  /* 0 a 38%: painel escuro solido, pra o titulo respirar.
+     A partir de 38% o veu magenta cai rapido e some no meio da tela,
+     entao o rosto aparece nitido a direita.
+     Base vertical mais sutil so pra grudar a foto no rodape do hero. */
   background:
     linear-gradient(90deg,
       var(--forest) 0%,
-      var(--forest) 42%,
-      color-mix(in srgb, var(--forest) 78%, transparent) 62%,
-      color-mix(in srgb, var(--forest) 40%, transparent) 82%,
-      color-mix(in srgb, var(--forest) 20%, transparent) 100%),
+      var(--forest) 38%,
+      color-mix(in srgb, var(--forest) 45%, transparent) 48%,
+      color-mix(in srgb, var(--forest) 10%, transparent) 62%,
+      transparent 78%),
     linear-gradient(0deg,
-      color-mix(in srgb, var(--forest) 45%, transparent),
-      transparent 30%);
+      color-mix(in srgb, var(--forest) 30%, transparent),
+      transparent 22%);
 }
 
 /* A foto e um retrato quadrado, entao mover o object-position pra
