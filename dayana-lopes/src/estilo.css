@@ -1946,140 +1946,62 @@ to {
   }
 }
 
+
 /* ===================================================================
-   Hero em duas colunas.
-   O default da referencia era foto sangrando por tras do texto. Aqui a
-   foto ocupa so o quadrante direito, isolada do painel escuro, como a
-   Dayana marcou no wireframe (2026-09-21).
+   Hero: foto de fundo sutil no lado direito, painel escuro cobrindo
+   o lado esquerdo pra o texto respirar.
+   Mantem a estrutura da referencia; ajusta so a intensidade do shade
+   pra a foto nao dominar o titulo (2026-09-21).
    =================================================================== */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr;
-  overflow: visible;
-}
-
-.hero-copy {
-  z-index: 2;
-  grid-area: 1 / 1;
-  align-self: center;
-  padding-top: 0;
-  padding-bottom: clamp(96px, 12vh, 140px);
-  position: relative;
-}
-
-/* A foto ganha o proprio quadrado, sem sangrar por tras do texto. */
-.hero-photo {
-  z-index: 1;
-  grid-area: 1 / 1;
-  align-self: stretch;
-  inset: auto;
-  position: relative;
-}
-.hero-photo img {
-  object-fit: cover;
-  object-position: 55% 25%;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* A sombra da referencia era do painel escuro atras da foto; agora vira
-   uma vinheta suave so na propria foto, para nao competir com o retrato. */
 .hero-shade {
-  z-index: 2;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--forest) 22%, transparent) 0%,
-    transparent 30% 70%,
-    color-mix(in srgb, var(--forest) 20%, transparent) 100%
-  );
-  pointer-events: none;
-  grid-area: 1 / 1;
-  align-self: stretch;
-  inset: auto;
-  position: relative;
+  background:
+    linear-gradient(90deg,
+      var(--forest) 0%,
+      var(--forest) 42%,
+      color-mix(in srgb, var(--forest) 78%, transparent) 62%,
+      color-mix(in srgb, var(--forest) 40%, transparent) 82%,
+      color-mix(in srgb, var(--forest) 20%, transparent) 100%),
+    linear-gradient(0deg,
+      color-mix(in srgb, var(--forest) 45%, transparent),
+      transparent 30%);
 }
 
-.hero-bottom {
-  z-index: 3;
-  bottom: 22px;
-}
-
+/* A foto e um retrato quadrado, entao mover o object-position pra
+   direita joga a maior parte pra fora. Encolher a imagem e coloca-la
+   no canto direito preserva o rosto e libera espaco pra o texto.
+   So no desktop; no mobile a foto continua ocupando o fundo inteiro
+   com overlay vertical, como a referencia. */
 @media (min-width: 900px) {
-  .hero {
-    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
-    min-height: 780px;
-  }
-  .hero-copy {
-    grid-area: 1 / 1;
-    padding-inline-start: max(var(--gutter), (100vw - var(--container)) / 2 + var(--gutter));
-    padding-inline-end: clamp(40px, 5vw, 96px);
-    max-width: none;
-  }
   .hero-photo {
-    grid-area: 1 / 2;
-    align-self: stretch;
-  }
-  .hero-shade {
-    grid-area: 1 / 2;
+    left: auto;
+    width: 65%;
   }
   .hero-photo img {
-    object-position: center 22%;
-  }
-  /* A barra inferior atravessa as duas colunas. */
-  .hero-bottom {
-    grid-area: 2 / 1 / 3 / 3;
-    position: relative;
-    bottom: auto;
-    border-top: 1px solid var(--line-light);
-    margin-top: 0;
+    object-position: 50% 25%;
   }
 }
 
-/* No mobile a foto volta a aparecer inteira, embaixo do texto. */
-@media (max-width: 899px) {
-  .hero {
-    grid-template-rows: auto auto auto;
-  }
-  .hero-copy {
-    grid-area: 1 / 1;
-    padding-top: 130px;
-    padding-bottom: 40px;
-  }
-  .hero-photo {
-    grid-area: 2 / 1;
-    height: min(70vh, 520px);
-  }
+@media (width<=1100px) {
   .hero-shade {
-    grid-area: 2 / 1;
+    background: linear-gradient(90deg,
+      var(--forest) 0%,
+      color-mix(in srgb, var(--forest) 85%, transparent) 35%,
+      color-mix(in srgb, var(--forest) 40%, transparent) 65%,
+      color-mix(in srgb, var(--forest) 20%, transparent) 100%);
   }
-  .hero-bottom {
-    grid-area: 3 / 1;
-    position: relative;
-    bottom: auto;
-    padding: 22px var(--gutter);
-    border-top: 1px solid var(--line-light);
+  .hero-photo img {
+    object-position: 82% 30%;
   }
 }
 
-/* Como a foto agora esta so a direita, o header por cima dela precisa
-   de um leve escurecimento pra continuar legivel antes de rolar. */
-.header:not(.scrolled) {
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--forest) 55%, transparent) 0%,
-    color-mix(in srgb, var(--forest) 30%, transparent) 80%,
-    transparent);
-  backdrop-filter: blur(2px);
-}
-
-/* Respiro entre a logo do header e o eyebrow do hero. No desktop o
-   hero-copy fica centralizado verticalmente, entao basta empurrar o
-   proprio bloco pra baixo do header. */
-.hero-copy {
-  padding-top: 96px;
-}
-@media (min-width: 900px) {
-  .hero-copy {
-    padding-top: 100px;
+@media (width<=767px) {
+  /* Aqui a referencia ja lidava com foto atras do texto (opacity .77
+     e degrade vertical). So mantenho, ela ja resolve. */
+  .hero-shade {
+    background: linear-gradient(180deg,
+      var(--forest) 0%,
+      var(--shade) 30%,
+      transparent 59%,
+      var(--forest) 96%);
   }
 }
