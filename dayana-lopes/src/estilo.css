@@ -2046,3 +2046,28 @@ to {
 .hero h1 em {
   color: #f4d5e3;
 }
+
+/* No mobile: eyebrow + h1 no topo, e a descricao + CTAs empurrados
+   pra baixo, colados no rodape do hero. Assim o rosto dela nao fica
+   coberto pelo bloco de texto. */
+@media (width<=767px) {
+  .hero {
+    /* Ocupa a viewport pra ter espaco pra distribuir o conteudo. */
+    min-height: 100svh;
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - 62px);
+  }
+  .hero-description {
+    /* auto empurra a descricao e tudo que vem depois pro fim da coluna. */
+    margin-top: auto;
+    padding-top: 40px;
+  }
+  .hero-actions {
+    margin-top: 22px;
+    /* Fica logo acima do hero-bottom (que esta a 22px do fundo). */
+    padding-bottom: 40px;
+  }
+}
