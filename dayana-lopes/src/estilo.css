@@ -2031,3 +2031,12 @@ to {
 .menu-leitor img {
   -webkit-user-drag: none;
 }
+
+/* No mobile o rosto vai pra borda direita. A foto original tem o rosto
+   perto do centro; ancorando em 30% mostra a metade esquerda da imagem,
+   que joga o rosto pro lado direito do container. */
+@media (width<=767px) {
+  .hero-photo img {
+    object-position: 12% 30%;
+  }
+}
