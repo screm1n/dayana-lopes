@@ -34,14 +34,6 @@ const Experiencia = () => {
             rotina. Em qualquer formato, a ideia é sair com clareza do que
             fazer, por que fazer e como ajustar quando a vida muda.
           </p>
-          <div className="reveal reveal-image reveal-pending">
-            <ImagemComPlaceholder
-              src="/detalhe.jpg"
-              arquivoPendente="detalhe.jpg"
-              alt="Detalhe do consultório"
-              legenda="detalhe do espaço"
-            />
-          </div>
         </div>
       </div>
     </section>
