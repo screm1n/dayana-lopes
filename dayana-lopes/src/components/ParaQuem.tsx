@@ -38,7 +38,7 @@ const ParaQuem = () => (
         <div className="reveal reveal-image reveal-pending">
           <img
             className="body-image"
-            src="/perfil2.jpg"
+            src="/perfil.jpg"
             alt="Dra. Dayana Lopes em seu atendimento"
             loading="lazy"
           />
