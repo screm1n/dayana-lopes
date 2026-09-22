@@ -42,7 +42,6 @@ const Experiencia = () => {
               legenda="detalhe do espaço"
             />
           </div>
-          <span className="eyebrow">ESCUTA. AVALIAÇÃO. ACOMPANHAMENTO.</span>
         </div>
       </div>
     </section>
