@@ -2040,3 +2040,9 @@ to {
     object-position: 12% 30%;
   }
 }
+
+/* O "versão" em italico do hero estava usando o rose-suave (#c6809d),
+   que sumia no fundo magenta. Rosa muito mais claro pra dar contraste. */
+.hero h1 em {
+  color: #f4d5e3;
+}
