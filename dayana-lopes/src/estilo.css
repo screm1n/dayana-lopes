@@ -1880,12 +1880,15 @@ to {
 }
 
 
-/* O "menu impresso" dela e retrato; a referencia usava foto deitada. */
+/* Agora a foto e a Dayana em retrato: cover normal, com forma de arco
+   organico igual as outras fotos do site. */
 .body-section .body-image {
-  aspect-ratio: auto;
-  object-fit: contain;
-  max-height: 420px;
-  background: color-mix(in srgb, var(--cream) 10%, transparent);
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-organic);
+  object-fit: cover;
+  object-position: center 25%;
+  width: 100%;
+  max-height: none;
 }
 
 /* Na referencia o layout do gatilho vinha das classes utilitarias do Radix.
