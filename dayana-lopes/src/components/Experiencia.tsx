@@ -1,11 +1,10 @@
-import { NOME_CLINICA } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
 import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
 const Experiencia = () => {
   const { conteudo } = useConteudo();
-  const srcLogoClinica = urlImagem(conteudo.imagens.logoClinica, "/logo-clinica.png");
-  const srcPerfil = urlImagem(conteudo.imagens.perfil, "/perfil.jpg");
+  // O terceiro slot de imagem do painel /admin passou a ser a foto do espaço.
+  const srcEspaco = urlImagem(conteudo.imagens.espaco, "/espaco.jpg");
 
   return (
     <section id="atendimento" className="experience section container">
@@ -18,16 +17,14 @@ const Experiencia = () => {
       </div>
 
       <div className="experience-collage">
-        <div className="reveal reveal-image reveal-pending experience-main painel-marca">
+        <div className="reveal reveal-image reveal-pending experience-main">
           <ImagemComPlaceholder
-            src={srcLogoClinica}
-            arquivoPendente="logo-clinica.png"
-            alt={NOME_CLINICA}
-            formato="quadrado"
-            compacto
-            ajuste="contain"
+            src={srcEspaco}
+            arquivoPendente="espaco.jpg"
+            alt="Consultório da Dra. Dayana Lopes em Belo Horizonte"
+            legenda="foto do espaço"
           />
-          <span className="image-caption">{NOME_CLINICA}</span>
+          <span className="image-caption">Um espaço pensado para você.</span>
         </div>
 
         <div className="experience-aside">
@@ -39,10 +36,10 @@ const Experiencia = () => {
           </p>
           <div className="reveal reveal-image reveal-pending">
             <ImagemComPlaceholder
-              src={srcPerfil}
-              arquivoPendente="perfil.jpg"
-              alt="Atendimento com a Dra. Dayana Lopes"
-              legenda="foto de perfil"
+              src="/detalhe.jpg"
+              arquivoPendente="detalhe.jpg"
+              alt="Detalhe do consultório"
+              legenda="detalhe do espaço"
             />
           </div>
           <span className="eyebrow">ESCUTA. AVALIAÇÃO. ACOMPANHAMENTO.</span>

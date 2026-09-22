@@ -5,7 +5,7 @@ import {
   INSTAGRAM,
   INSTAGRAM_HANDLE,
   LINK_AGENDAMENTO,
-  NOME_CLINICA,
+  PROFISSAO,
   ROTULO_AGENDAMENTO,
 } from "@/lib/links";
 import { ImagemComPlaceholder } from "./Placeholder";
@@ -13,7 +13,8 @@ import { useConteudo, urlImagem } from "@/hooks/use-conteudo";
 
 const Contato = () => {
   const { conteudo } = useConteudo();
-  const srcLogoClinica = urlImagem(conteudo.imagens.logoClinica, "/logo-clinica.png");
+  // O terceiro slot de imagem do painel /admin passou a ser a foto do espaço.
+  const srcEspaco = urlImagem(conteudo.imagens.espaco, "/espaco.jpg");
 
   return (
     <section id="contato" className="contact section container">
@@ -61,21 +62,19 @@ const Contato = () => {
         </dl>
       </div>
 
-      <div className="reveal reveal-image reveal-pending contact-place painel-marca">
+      <div className="reveal reveal-image reveal-pending contact-place">
         <ImagemComPlaceholder
-          src={srcLogoClinica}
-          arquivoPendente="logo-clinica.png"
-          alt={NOME_CLINICA}
-          formato="quadrado"
-          compacto
-          ajuste="contain"
+          src={srcEspaco}
+          arquivoPendente="espaco.jpg"
+          alt="Consultório da Dra. Dayana Lopes em Belo Horizonte"
+          legenda="foto do espaço"
         />
         <div>
           <MapPin aria-hidden />
           <span>
             {CIDADE.split(",")[0]}
             <br />
-            <small>{NOME_CLINICA}</small>
+            <small>{PROFISSAO}</small>
           </span>
         </div>
       </div>

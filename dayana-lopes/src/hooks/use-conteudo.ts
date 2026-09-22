@@ -12,6 +12,19 @@ export type ConteudoDto = {
   procedimentos: ProcedimentoDto[];
   imagens: {
     logo?: string | null;
+    /** O terceiro slot nasceu como logo da clínica e hoje guarda a foto do
+     *  espaço. A chave na Function e no Blob continua `logoClinica` — só o
+     *  nome exposto ao front mudou, para não migrar dado gravado. */
+    espaco?: string | null;
+    perfil?: string | null;
+  };
+};
+
+/** O que a Function `conteudo` devolve, com os nomes de chave originais. */
+type ConteudoWire = {
+  procedimentos?: ProcedimentoDto[];
+  imagens?: {
+    logo?: string | null;
     logoClinica?: string | null;
     perfil?: string | null;
   };
@@ -19,7 +32,7 @@ export type ConteudoDto = {
 
 const INICIAL: ConteudoDto = {
   procedimentos: [],
-  imagens: { logo: null, logoClinica: null, perfil: null },
+  imagens: { logo: null, espaco: null, perfil: null },
 };
 
 /** Retorna a URL certa para uma imagem gerenciada: se houver override no Blob usa a Function `midia`,
@@ -44,14 +57,14 @@ function notificar() {
   ouvintes.forEach((o) => o(cache, carregandoGlobal));
 }
 
-function normalizar(dados: ConteudoDto): ConteudoDto {
+function normalizar(dados: ConteudoWire): ConteudoDto {
   return {
     procedimentos: Array.isArray(dados.procedimentos)
       ? [...dados.procedimentos].sort((a, b) => a.ordem - b.ordem)
       : [],
     imagens: {
       logo: dados.imagens?.logo ?? null,
-      logoClinica: dados.imagens?.logoClinica ?? null,
+      espaco: dados.imagens?.logoClinica ?? null,
       perfil: dados.imagens?.perfil ?? null,
     },
   };

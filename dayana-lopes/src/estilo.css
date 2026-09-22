@@ -1807,20 +1807,6 @@ to {
   padding: 3px;
 }
 
-/* Painel de marca: usado onde a referencia tinha foto de ambiente e
-   ela ainda nao mandou nenhuma. Melhor um bloco de cor honesto do que
-   uma foto de banco de imagem fingindo ser a clinica dela. */
-.painel-marca {
-  background: color-mix(in srgb, var(--olive) 14%, var(--paper));
-  place-items: center;
-  min-height: 320px;
-  display: grid;
-}
-.painel-marca img {
-  width: min(58%, 220px);
-  height: auto;
-  object-fit: contain;
-}
 
 /* Leitor paginado do menu impresso (as 8 imagens de /public). */
 .menu-leitor {
@@ -1886,9 +1872,6 @@ to {
 }
 
 @media (width<=767px) {
-  .painel-marca {
-    min-height: 240px;
-  }
   .menu-leitor figcaption {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -1896,11 +1879,6 @@ to {
   }
 }
 
-/* A legenda do painel de marca fica sobre fundo claro, nao sobre foto. */
-.painel-marca .image-caption {
-  color: var(--forest);
-  text-shadow: none;
-}
 
 /* O "menu impresso" dela e retrato; a referencia usava foto deitada. */
 .body-section .body-image {

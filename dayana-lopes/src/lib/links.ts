@@ -5,7 +5,7 @@
 export const NOME = "Dayana Lopes";
 export const NOME_COMPLETO = "Dayana Lopes";
 export const PROFISSAO = "Estética Avançada · Tricologia Capilar";
-export const NOME_CLINICA = "Espaço Sempre Linda Estética e Beleza";
+// A marca dela e o proprio nome, nao o do espaco onde atende.
 
 // Registro do conselho (CRN, CRP, CREFITO...). Vazio = some do rodapé.
 export const REGISTRO = "CRBM 17976";

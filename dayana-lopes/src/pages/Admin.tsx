@@ -5,11 +5,13 @@ import { atualizarConteudoLocal, urlImagem, type ConteudoDto, type ProcedimentoD
 
 const CHAVE_SENHA = "dayana_admin_senha";
 
-type Alvo = "logo" | "perfil";
+type Alvo = "logo" | "logoClinica" | "perfil";
 
 const ROTULOS_IMAGEM: Record<Alvo, { titulo: string; ajuda: string; estatico: string }> = {
   logo: { titulo: "Logo da marca", ajuda: "aparece no cabeçalho e no rodapé", estatico: "/logo.png" },
   perfil: { titulo: "Foto de perfil", ajuda: "foto principal ao lado do título", estatico: "/perfil.jpg" },
+  // A chave continua logoClinica por causa do que já está gravado no Blob.
+  logoClinica: { titulo: "Foto do espaço", ajuda: "consultório, na seção de atendimento e no contato", estatico: "/espaco.jpg" },
 };
 
 export default function Admin() {
@@ -515,7 +517,11 @@ function AbaImagens({
   conteudo: ConteudoDto | null;
   chamar: (corpo: unknown) => Promise<unknown>;
 }) {
-  const overrides = conteudo?.imagens ?? { logo: null, perfil: null };
+  const overrides: Partial<Record<Alvo, string | null>> = {
+    logo: conteudo?.imagens?.logo ?? null,
+    perfil: conteudo?.imagens?.perfil ?? null,
+    logoClinica: conteudo?.imagens?.espaco ?? null,
+  };
 
   return (
     <div>
